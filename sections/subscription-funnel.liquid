@@ -17,54 +17,55 @@
 {% endschema %}
 
 <style>
+  :root {
+    --sf-blue: #1c5bf0; /* Main brand blue */
+    --sf-light-blue: #eff4ff;
+    --sf-border: #dce8ff;
+    --sf-text: #1a1a1a;
+    --sf-text-muted: #666;
+    --sf-green-bg: #6bfebb;
+    --sf-green-text: #004d40;
+  }
+
   .sf-wrapper {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f7f9fa;
     min-height: 100vh;
     padding-bottom: 40px;
-    color: #1a1a1a;
+    color: var(--sf-text);
   }
 
+  /* Utility CSS */
+  .hidden { display: none !important; }
+  .text-center { text-align: center; }
+  .mb-1 { margin-bottom: 0.5rem; }
+  .mb-2 { margin-bottom: 1rem; }
+  .mb-4 { margin-bottom: 2rem; }
+  
   /* Header */
   .sf-header {
-    background-color: #1c5bf0; /* Bright Blue */
+    background-color: var(--sf-blue);
     color: white;
     padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
-  .sf-logo {
-    font-size: 24px;
-    font-weight: 700;
-    font-style: italic;
-  }
-  .sf-logo span {
-    font-weight: 300;
-    font-style: normal;
-    font-size: 16px;
-    margin-left: 5px;
-  }
-
-  .sf-exit {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+  .sf-logo { font-size: 24px; font-weight: 700; font-style: italic; }
+  .sf-logo span { font-weight: 300; font-style: normal; font-size: 16px; margin-left: 5px; }
 
   /* Main Container */
   .sf-container {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 20px auto;
     background: white;
-    margin-top: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     padding: 40px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   /* Progress Bar */
@@ -72,346 +73,491 @@
     background-color: #e6efff;
     height: 8px;
     border-radius: 4px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     overflow: hidden;
   }
   .sf-progress-fill {
-    background-color: #1c5bf0;
-    width: 60%;
+    background-color: var(--sf-blue);
+    width: 0%;
     height: 100%;
     border-radius: 4px;
+    transition: width 0.3s ease;
   }
 
-  /* Breadcrumbs & Title */
-  .sf-breadcrumbs {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .sf-title {
+  /* Title & Subtitle */
+  .sf-step-title {
     text-align: center;
     font-size: 28px;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
   }
-  
-  .sf-subtitle {
+  .sf-step-subtitle {
     text-align: center;
-    color: #1c5bf0;
-    font-size: 14px;
+    color: #555;
+    font-size: 16px;
     margin-bottom: 40px;
-  }
-  .sf-subtitle a {
-    color: #1c5bf0;
-    text-decoration: underline;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  /* Grid Layout */
-  .sf-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
+  /* Selection Cards (Generic) */
+  .sf-card-grid {
+    display: flex;
+    justify-content: center;
     gap: 30px;
     margin-bottom: 40px;
+    flex-wrap: wrap;
   }
-
-  @media (max-width: 768px) {
-    .sf-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Product Card */
-  .sf-product-card {
-    border: 2px solid #5d8eff; /* Lighter Blue border */
+  
+  .sf-select-card {
+    border: 2px solid #eee;
+    background: #f8f9fc;
     border-radius: 12px;
-    overflow: hidden;
+    padding: 30px;
+    width: 280px;
     text-align: center;
-    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
     display: flex;
     flex-direction: column;
-  }
-  
-  .sf-product-header {
-    background-color: #eff4ff;
-    padding: 15px;
-    border-bottom: 1px solid #dce8ff;
-  }
-  .sf-product-header h2 {
-    color: #000;
-    font-size: 20px;
-    margin: 0;
-    font-weight: 700;
-  }
-  .sf-product-header p {
-    color: #555;
-    font-size: 14px;
-    margin: 5px 0 0 0;
-  }
-  
-  .sf-product-image {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
     align-items: center;
     justify-content: center;
   }
-  .sf-product-image img {
-    max-width: 100%;
-    height: auto;
-    max-height: 250px;
-  }
-
-  /* Details Panel (Accordion styled) */
-  .sf-details-panel {
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    overflow: hidden;
+  
+  .sf-select-card:hover {
+    border-color: #b3caff;
   }
   
-  .sf-accordion-header {
+  .sf-select-card.selected {
+    border: 2px solid var(--sf-blue);
     background: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-  }
-  
-  .sf-accordion-content {
-    padding: 20px;
-    background: #fafafa;
+    box-shadow: 0 0 0 1px var(--sf-blue);
   }
 
-  .sf-line-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
-  .sf-line-item:last-child {
-    border-bottom: none;
-  }
-  
-  .sf-item-title {
-    font-weight: 600;
-    font-size: 14px;
-    color: #333;
-  }
-  .sf-item-desc {
-    font-size: 12px;
-    color: #777;
-    margin-top: 2px;
-  }
-  
-  .sf-price {
-    font-weight: 700;
-    font-size: 16px;
-  }
-  
-  .sf-badge {
-    background-color: #64ffda;
-    color: #004d40;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  /* Form Section */
-  .sf-form-section h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  .sf-form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-  @media (max-width: 600px) {
-    .sf-form-grid { grid-template-columns: 1fr; }
-  }
-  
-  .sf-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-  
-  .sf-checkbox-wrapper {
+  .sf-card-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    height: 60px;
     display: flex;
     align-items: center;
-    font-size: 13px;
+  }
+  
+  .sf-card-title {
+    font-weight: 700;
+    color: var(--sf-blue);
+    margin-bottom: 10px;
+  }
+  
+  .sf-card-desc {
+    font-size: 14px;
     color: #555;
-    gap: 8px;
+    line-height: 1.4;
   }
 
-  /* Footer Actions */
-  .sf-footer-actions {
+  /* Step 2 specific */
+  .sf-temp-options {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 20px;
+  }
+  .sf-temp-item {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600; 
+  }
+
+  /* Step 3 (Details) */
+  .sf-product-detail-grid {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .sf-gallery { flex: 1; background: #f0f0f0; border-radius: 10px; min-height: 300px; display: flex; align-items:center; justify-content:center; }
+  .sf-info { flex: 1; }
+  .sf-check-list { list-style: none; padding: 0; margin: 20px 0; }
+  .sf-check-list li { margin-bottom: 10px; font-size: 14px; display: flex; gap: 10px; }
+  .sf-check-list svg { color: var(--sf-blue); width: 20px; flex-shrink: 0; }
+  
+  .sf-features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 40px; }
+  .sf-feature-box { background: #eee; padding: 20px; border-radius: 8px; text-align: center; }
+  .sf-testimonial { background: #f9f9f9; padding: 20px; margin-top: 40px; border-radius: 8px; }
+
+  /* Step 4 (Plans) */
+  .sf-plan-grid { display: flex; gap: 20px; justify-content: center; }
+  .sf-plan-card { 
+    background: #f4f8ff; 
+    border-radius: 10px; 
+    padding: 30px 20px; 
+    width: 300px; 
+    text-align: center; 
+    border: 2px solid transparent; 
+    cursor: pointer;
+  }
+  .sf-plan-card.selected { border-color: var(--sf-blue); background: white; }
+  .sf-plan-price { font-size: 24px; font-weight: 700; margin: 15px 0; }
+  .sf-calc-btn { 
+    background: #6bfebb; color: #00332c; 
+    border: none; padding: 10px 20px; 
+    border-radius: 20px; font-weight: 700; 
+    cursor: pointer; margin-bottom: 30px; 
+    display: inline-block;
+  }
+
+  /* Step 5 (Calculator) */
+  .sf-calc-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    text-align: center;
+  }
+  .sf-counter-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  .sf-circle-btn {
+    width: 40px; height: 40px;
+    background: var(--sf-blue); color: white;
+    border-radius: 50%; border:none;
+    font-size: 20px; cursor: pointer;
+  }
+  .sf-counter-val {
+    border: 1px solid var(--sf-blue);
+    padding: 10px 40px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+  .sf-slider { width: 100%; margin: 20px 0; }
+  
+  .sf-summary-box {
+    background: #f4f8ff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+
+  /* Step 6 (Layout from previous iteration) */
+  .sf-grid-final { display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; }
+  .sf-product-card-final { border: 2px solid #5d8eff; border-radius: 12px; overflow: hidden; text-align: center; }
+  .sf-details-panel { border: 1px solid #ddd; border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
+  .sf-accordion-header { background: white; padding: 15px 20px; display: flex; justify-content: space-between; font-weight: 600; border-bottom: 1px solid #eee; }
+  .sf-line-item { display: flex; justify-content: space-between; padding: 10px 20px; border-bottom: 1px solid #eee; }
+  .sf-form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 20px; }
+  .sf-input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+
+  /* Footer Navigation */
+  .sf-footer-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
+    margin-top: auto;
+    padding-top: 40px;
   }
   
-  .btn-plain {
-    background: none;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #666;
+  .btn-plain { background: white; border: 1px solid #ddd; padding: 10px 25px; border-radius: 20px; cursor: pointer; }
+  .btn-primary { 
+    background-color: var(--sf-blue); color: white; border: none; 
+    padding: 12px 30px; border-radius: 25px; font-weight: 600; 
+    cursor: pointer; 
   }
-  
-  .btn-primary {
-    background-color: #1c5bf0;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(28, 91, 240, 0.3);
-  }
-  .btn-primary:hover {
-    background-color: #1545b5;
-  }
+  .btn-primary:hover { background-color: #1545b5; }
 
 </style>
 
 <div class="sf-wrapper">
   
-  <!-- Header -->
+  <!-- Global Header -->
   <div class="sf-header">
     <div class="sf-logo">Culligan <span>Water you love.</span></div>
-    <a href="/" class="sf-exit">Salir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a>
+    <a href="/" style="color:white; text-decoration:none;">Salir ✕</a>
   </div>
 
   <div class="sf-container">
     
-    <!-- Progress -->
+    <!-- Progress Bar -->
     <div class="sf-progress-bg">
-      <div class="sf-progress-fill"></div>
+      <div id="sf-progress" class="sf-progress-fill" style="width: 16%;"></div>
     </div>
 
-    <!-- Breadcrumb -->
-    <div class="sf-breadcrumbs">
-      🏠 Home > CB - Core
-    </div>
+    <!-- STEPS CONTAINER -->
+    <div id="sf-steps-container">
 
-    <!-- Title -->
-    <h1 class="sf-title">Suscripción mensual</h1>
-    <p class="sf-subtitle">
-      <span style="font-weight: 700; color:#333">¡Buena opción!</span> Nunca dejarás de estar abastecido. <a href="#">Solicita las botellas que necesites en cada envío.</a>
-    </p>
-
-    <div class="sf-grid">
-      
-      <!-- Left Column: Product -->
-      <div class="sf-product-card">
-        <div class="sf-product-header">
-          <h2>CB Core</h2>
-          <p>Dispensador de agua embotellada</p>
-        </div>
-        <div class="sf-product-image">
-           {% if section.settings.product_image %}
-              <img src="{{ section.settings.product_image | image_url: width: 400 }}" alt="Dispensador">
-           {% else %}
-               <!-- Placeholder SVG/Image if none selected -->
-               <img src="https://cdn.shopify.com/s/files/1/0651/1601/2763/files/dispenser-placeholder.png?v=1700000000" onerror="this.src='https://placehold.co/200x400/png?text=Dispenser'; this.style.opacity=0.5" alt="Dispensador" style="max-height:300px;">
-           {% endif %}
-        </div>
-      </div>
-
-      <!-- Right Column: Details -->
-      <div class="sf-details-container">
+      <!-- STEP 1: Type Selection -->
+      <div class="sf-step" data-step="1">
+        <h1 class="sf-step-title">Elige Embotellada o filtrada</h1>
+        <p class="sf-step-subtitle">¿Qué tipo de producto te interesa?</p>
         
-        <!-- Accordion 1 -->
-        <div class="sf-details-panel">
-          <div class="sf-accordion-header">
-            <span>¿Qué incluye tu plan?</span>
-            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <div class="sf-card-grid">
+          <div class="sf-select-card" onclick="selectCard(this)">
+            <div class="sf-card-icon">💧</div>
+            <div class="sf-card-title">Dispensador de<br>agua embotellada</div>
           </div>
-          <div class="sf-accordion-content">
-            
-            <!-- Item 1 -->
-            <div class="sf-line-item">
-              <div>
-                <div class="sf-item-title">24 Botellas de agua y 6 envíos</div>
-                <div class="sf-item-desc">Hasta 24 botellas de agua en un año y 6 envíos gratuitos.</div>
-              </div>
-              <div class="sf-price">20€/mes</div>
-            </div>
+          <div class="sf-select-card" onclick="selectCard(this)">
+            <div class="sf-card-icon">🚰</div>
+            <div class="sf-card-title">Dispensador conectado<br>a la matriz de agua</div>
+          </div>
+        </div>
+        
+        <div class="text-center" style="margin-top: 50px; font-size:14px;">
+           <p>¿Eres empresa?<br><a href="#" style="color:var(--sf-blue)">Encuentra tu solución →</a></p>
+        </div>
+      </div>
 
-            <!-- Item 2 -->
-             <div class="sf-line-item">
-              <div>
-                <div class="sf-item-title">Coste de instalación</div>
-                <div class="sf-item-desc">0€/mes</div>
-              </div>
-              <div class="sf-badge">GRATIS</div>
-            </div>
+      <!-- STEP 2: Machine Selection -->
+      <div class="sf-step hidden" data-step="2">
+        <div class="text-center mb-2" style="font-size:14px; color:#666;">🏠 Home > CB - Core</div>
+        <h1 class="sf-step-title">¿Qué tipo de máquina buscas?</h1>
+        <p class="sf-step-subtitle">Selecciona qué máquina se adapta mejor a tu casa.</p>
 
-            <!-- Item 3 -->
-             <div class="sf-line-item">
-              <div>
-                <div class="sf-item-title">Alquiler de máquina</div>
-                <div class="sf-item-desc">0€/mes</div>
-              </div>
-              <div class="sf-badge">GRATIS</div>
-            </div>
-
-            <!-- Item 4 -->
-             <div class="sf-line-item">
-              <div>
-                <div class="sf-item-title">Sin fianza</div>
-                <div class="sf-item-desc">Este producto no requiere fianza</div>
-              </div>
-            </div>
-
+        <div class="sf-card-grid">
+          <div class="sf-select-card" onclick="selectCard(this)">
+            <div class="sf-card-icon"><img src="https://placehold.co/50x100/png?text=Floor" style="height:80px"></div>
+            <div class="sf-card-title">CB Core<br><span style="font-weight:400; font-size:14px; color:#666">Dispensador de pie</span></div>
+          </div>
+          <div class="sf-select-card" onclick="selectCard(this)">
+            <div class="sf-card-icon"><img src="https://placehold.co/50x80/png?text=Table" style="height:60px"></div>
+             <div class="sf-card-title">Culligan Touch<br><span style="font-weight:400; font-size:14px; color:#666">Dispensador sobre mostrador</span></div>
           </div>
         </div>
 
-        <!-- Accordion 2 (Collapsed Styled) -->
-        <div class="sf-details-panel" style="margin-top: 15px;">
-           <div class="sf-accordion-header" style="border-bottom:none">
-            <span>Detalles del contrato</span>
-            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" transform="rotate(-90 6 3.5)"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
+        <p class="text-center" style="color:var(--sf-blue); font-size:12px;">Ambos productos disponen de 3 temperaturas: Ambiente, frío y caliente.</p>
+        <div class="sf-temp-options">
+           <div class="sf-temp-item">☀️❄️<br>Frío y Caliente</div>
+           <div class="sf-temp-item">❄️🌡️<br>Frío y Natural</div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Product Details -->
+      <div class="sf-step hidden" data-step="3">
+         <div class="text-center mb-2" style="font-size:14px; color:#666;">🏠 Home > CB - Core</div>
+         
+         <div class="sf-product-detail-grid">
+            <div class="sf-gallery">
+               <img src="https://placehold.co/200x400/png?text=Dispenser" alt="Dispenser" style="max-height:300px">
+            </div>
+            <div class="sf-info">
+               <h2 style="margin-top:0">CB Core Dispensador de pie</h2>
+               <p class="mb-2" style="color:#666">Agua embotellada</p>
+               <p style="font-size:14px">Dispensador de agua embotellada seguro y ecológico que se adapta a todos los presupuestos.</p>
+               
+               <ul class="sf-check-list">
+                  <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Superficie extra duradera resistente.</li>
+                  <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Acepta todas las botellas estándar.</li>
+                  <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Disponible en modelos negro y blanco.</li>
+               </ul>
+            </div>
+         </div>
+
+         <h3 class="text-center">Disfruta el perfecto balance entre calidad y funcionalidad</h3>
+         <div class="sf-features-grid">
+            <div class="sf-feature-box">
+              <img src="https://placehold.co/100x100" class="mb-1" style="border-radius:8px">
+              <h4>Característica Uno</h4>
+              <p style="font-size:12px">Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div class="sf-feature-box">
+              <img src="https://placehold.co/100x100" class="mb-1" style="border-radius:8px">
+              <h4>Característica Dos</h4>
+              <p style="font-size:12px">Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div class="sf-feature-box">
+              <img src="https://placehold.co/100x100" class="mb-1" style="border-radius:8px">
+              <h4>Característica Tres</h4>
+              <p style="font-size:12px">Lorem ipsum dolor sit amet.</p>
+            </div>
+         </div>
+
+         <div class="sf-testimonial">
+            <div style="color:#ffb400">★★★★★</div>
+            <p style="font-style:italic; font-size:14px; margin:10px 0;">"La compra fue sencilla y la información de entrega excelente."</p>
+            <small>- Beatriz M.</small>
+         </div>
+      </div>
+
+      <!-- STEP 4: Plan Selection -->
+      <div class="sf-step hidden" data-step="4">
+        <div class="text-center mb-2" style="font-size:14px; color:#666;">🏠 Home > CB - Core</div>
+        <h1 class="sf-step-title">Selecciona el plan que más se adapte</h1>
+        <p class="sf-step-subtitle">¡Elige tu estilo de hidratación en 2 pasos!</p>
+        
+        <div class="text-center">
+           <button class="sf-calc-btn">Calcular mi consumo ></button>
         </div>
 
+        <div class="sf-plan-grid">
+           <div class="sf-plan-card" onclick="selectCard(this)">
+              <div style="font-weight:700; font-size:12px; margin-bottom:10px;">PLAN FLEXIBLE</div>
+              <img src="https://placehold.co/50x50" class="mb-1">
+              <div style="font-size:14px">Pago único ahora: <span style="font-weight:700">10€/botella</span></div>
+              <div style="font-size:12px; color:var(--sf-blue); margin:10px 0;">Pedido mínimo de 4 botellas (11L)</div>
+              <div style="font-size:11px; color:#666">Podrás pedir más bajo demanda cuando lo necesites.</div>
+           </div>
+           
+           <div class="sf-plan-card selected" onclick="selectCard(this)">
+              <div style="font-weight:700; font-size:12px; margin-bottom:10px;">PLAN MENSUAL</div>
+              <img src="https://placehold.co/50x50" class="mb-1">
+              <div style="font-size:14px">Suscripción mensual: <span style="font-weight:700">20€/mes</span></div>
+              <div style="font-size:12px; color:var(--sf-blue); margin:10px 0;">Incluye 24 botellas al año y 6 envíos</div>
+              <div style="font-size:11px; color:#666">Podrás pedir más bajo demanda cuando lo necesites.</div>
+           </div>
+        </div>
+        
+        <div style="background:#e0fcf2; color:#004d40; padding:10px; font-size:12px; text-align:center; border-radius:4px; margin-top:30px;">
+           Dato de interés: Un adulto promedio bebe 2L al día.
+        </div>
       </div>
-    </div>
 
-    <!-- Form -->
-    <div class="sf-form-section">
-      <h3>Guarda tu presupuesto</h3>
-      <div class="sf-form-grid">
-         <input type="text" class="sf-input" placeholder="Nombre">
-         <input type="text" class="sf-input" placeholder="Teléfono">
-         <input type="email" class="sf-input" placeholder="Email (opcional)">
+       <!-- STEP 5: Calculator -->
+      <div class="sf-step hidden" data-step="5">
+          <div class="text-center mb-2" style="font-size:14px; color:#666;">🏠 Home > CB - Core</div>
+          <h1 class="sf-step-title">¿Cuántas botellas quieres comprar?</h1>
+          <p class="sf-step-subtitle">Calcularemos el tiempo de abastecimiento para 2.5 personas.</p>
+          
+          <div class="text-center"><button class="sf-calc-btn">Calcular mi consumo ></button></div>
+
+          <div class="sf-calc-wrapper">
+             <div style="background:#f5f5f5; padding:5px; font-size:12px; margin-bottom:20px;">Esta selección te durará 3 meses</div>
+             
+             <div class="sf-counter-control">
+                <button class="sf-circle-btn">-</button>
+                <div class="sf-counter-val">6 botellas</div>
+                <button class="sf-circle-btn">+</button>
+             </div>
+             
+             <input type="range" class="sf-slider" min="4" max="24" value="6">
+
+             <div class="sf-summary-box">
+                <div class="mb-1">Plan Flexible</div>
+                <img src="https://placehold.co/40x40" class="mb-1">
+                <div class="mb-1">Pago único ahora: <strong>60€</strong></div>
+                <div style="font-size:11px; color:#666">Pedido inicial de 6 botellas (11L)</div>
+             </div>
+          </div>
       </div>
-      <label class="sf-checkbox-wrapper">
-        <input type="checkbox"> Quiero recibir emails con noticias y ofertas.
-      </label>
-    </div>
 
-    <!-- Footer Buttons -->
-    <div class="sf-footer-actions">
-       <button class="btn-plain"> &lt; Atrás</button>
-       <button class="btn-primary">Pagar suscripción &gt;</button>
+      <!-- STEP 6: Final Summary (Original View) -->
+      <div class="sf-step hidden" data-step="6">
+          <div class="text-center mb-2" style="font-size:14px; color:#666;">🏠 Home > CB - Core</div>
+          <h1 class="sf-step-title">Suscripción mensual</h1>
+          <p class="sf-step-subtitle">¡Buena opción! Nunca dejarás de estar abastecido.</p>
+
+          <div class="sf-grid-final">
+             <!-- Product -->
+             <div class="sf-product-card-final">
+                <div style="background:#eff4ff; padding:15px; border-bottom:1px solid #dce8ff;">
+                   <h2 style="font-size:20px; font-weight:700; margin:0">CB Core</h2>
+                   <p style="margin:5px 0 0 0; font-size:14px; color:#555">Dispensador de agua embotellada</p>
+                </div>
+                <div style="padding:20px">
+                   <img src="https://placehold.co/200x300/png?text=Dispenser" style="max-height:250px">
+                </div>
+             </div>
+
+             <!-- Details -->
+             <div>
+                <div class="sf-details-panel">
+                   <div class="sf-accordion-header">
+                      <span>¿Qué incluye tu plan?</span><span>^</span>
+                   </div>
+                   <div>
+                       <div class="sf-line-item">
+                          <div><div style="font-weight:600">24 Botellas + 6 envíos</div><small style="color:#777">Anual</small></div>
+                          <div style="font-weight:700">20€/mes</div>
+                       </div>
+                       <div class="sf-line-item">
+                          <div><div style="font-weight:600">Instalación</div></div>
+                          <div style="background:#64ffda; color:#004d40; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:700">GRATIS</div>
+                       </div>
+                   </div>
+                </div>
+                
+                <h3>Guarda tu presupuesto</h3>
+                <div class="sf-form-grid">
+                   <input type="text" class="sf-input" placeholder="Nombre">
+                   <input type="text" class="sf-input" placeholder="Teléfono">
+                   <input type="email" class="sf-input" placeholder="Email (opcional)">
+                </div>
+             </div>
+          </div>
+      </div>
+
+    </div> <!-- End Steps Container -->
+
+    <!-- Navigation Footer -->
+    <div class="sf-footer-nav" id="sf-footer-nav">
+       <button class="btn-plain" id="btn-back" onclick="changeStep(-1)"> &lt; Atrás</button>
+       <button class="btn-primary" id="btn-next" onclick="changeStep(1)">Continuar &gt;</button>
     </div>
 
   </div>
 </div>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 6;
+
+  function updateUI() {
+    // 1. Hide all steps
+    document.querySelectorAll('.sf-step').forEach(el => el.classList.add('hidden'));
+    
+    // 2. Show current step
+    const currentEl = document.querySelector(`.sf-step[data-step="${currentStep}"]`);
+    if(currentEl) currentEl.classList.remove('hidden');
+
+    // 3. Update Progress Bar
+    const progress = (currentStep / totalSteps) * 100;
+    document.getElementById('sf-progress').style.width = `${progress}%`;
+
+    // 4. Update Buttons
+    const btnBack = document.getElementById('btn-back');
+    const btnNext = document.getElementById('btn-next');
+
+    if (currentStep === 1) {
+      btnBack.style.display = 'none'; // Optional: hide back on first step or link to home
+    } else {
+      btnBack.style.display = 'block';
+    }
+
+    if (currentStep === totalSteps) {
+      btnNext.innerHTML = 'Pagar suscripción >';
+    } else {
+      btnNext.innerHTML = 'Continuar >';
+    }
+
+    // Scroll to top of container
+    document.querySelector('.sf-header').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function changeStep(direction) {
+    const nextText = document.getElementById('btn-next').innerText;
+    
+    // If last step and clicking next -> Alert (Mock checkout)
+    if (currentStep === totalSteps && direction === 1) {
+       alert('Redirigiendo a checkout...');
+       return;
+    }
+
+    // Boundary checks
+    if (currentStep + direction < 1) return;
+    if (currentStep + direction > totalSteps) return;
+
+    currentStep += direction;
+    updateUI();
+  }
+
+  // Visual selection logic
+  function selectCard(card) {
+    // Deselect siblings
+    const parent = card.parentElement;
+    parent.querySelectorAll('.sf-select-card, .sf-plan-card').forEach(c => c.classList.remove('selected'));
+    // Select clicked
+    card.classList.add('selected');
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', updateUI);
+</script>

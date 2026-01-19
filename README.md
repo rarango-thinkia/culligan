@@ -36,9 +36,17 @@ npm run push
 ```
 
 El CLI te preguntará:
-1.  A qué tema quieres subir los cambios.
-    - Selecciona el tema **Live (Publicado)** si quieres que los clientes lo vean de inmediato.
-    - O selecciona un tema **Unpublished** (o crea uno nuevo) para subirlo como borrador y revisarlo antes de publicar.
+1.  **Select a theme to push to (Elige el destino):**
+    *   **Live (Horizon):** ⚠️ ¡Cuidado! Esto actualiza la tienda pública visible para todos los clientes. Úsalo solo para versiones finales.
+    *   **Unpublished / Development:** Recomendado para subir funcionalidades en prueba (como el nuevo funnel de suscripción). Si no existe, elige `[Create a new theme]` y ponle un nombre como "Testing Funnel".
+
+2.  **Confirmación:**
+    *   Si eliges Live, te pedirá confirmación explícita ("Yes, confirm changes").
+
+**Ejemplo de flujo para esta nueva funcionalidad:**
+1.  Sube cambios a un tema borrador: `npm run push` -> Elige "Subscription Draft".
+2.  Comparte el enlace del borrador para revisión.
+3.  Una vez aprobado, haz `npm run push` -> Elige "Horizon (Live)".
 
 ## 4. Control de Versiones (Git)
 
