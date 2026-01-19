@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "cb_core_landing": {
+      "type": "cb-core-landing",
+      "settings": {}
+    }
+  },
+  "order": [
+    "cb_core_landing"
+  ]
+}
