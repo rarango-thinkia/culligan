@@ -1,0 +1,417 @@
+{% schema %}
+{
+  "name": "Subscription Funnel",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscription Funnel"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .sf-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f7f9fa;
+    min-height: 100vh;
+    padding-bottom: 40px;
+    color: #1a1a1a;
+  }
+
+  /* Header */
+  .sf-header {
+    background-color: #1c5bf0; /* Bright Blue */
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sf-logo {
+    font-size: 24px;
+    font-weight: 700;
+    font-style: italic;
+  }
+  .sf-logo span {
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    margin-left: 5px;
+  }
+
+  .sf-exit {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* Main Container */
+  .sf-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 40px;
+  }
+
+  /* Progress Bar */
+  .sf-progress-bg {
+    background-color: #e6efff;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+  .sf-progress-fill {
+    background-color: #1c5bf0;
+    width: 60%;
+    height: 100%;
+    border-radius: 4px;
+  }
+
+  /* Breadcrumbs & Title */
+  .sf-breadcrumbs {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .sf-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  .sf-subtitle {
+    text-align: center;
+    color: #1c5bf0;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .sf-subtitle a {
+    color: #1c5bf0;
+    text-decoration: underline;
+  }
+
+  /* Grid Layout */
+  .sf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .sf-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Product Card */
+  .sf-product-card {
+    border: 2px solid #5d8eff; /* Lighter Blue border */
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    background: white;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sf-product-header {
+    background-color: #eff4ff;
+    padding: 15px;
+    border-bottom: 1px solid #dce8ff;
+  }
+  .sf-product-header h2 {
+    color: #000;
+    font-size: 20px;
+    margin: 0;
+    font-weight: 700;
+  }
+  .sf-product-header p {
+    color: #555;
+    font-size: 14px;
+    margin: 5px 0 0 0;
+  }
+  
+  .sf-product-image {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sf-product-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 250px;
+  }
+
+  /* Details Panel (Accordion styled) */
+  .sf-details-panel {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .sf-accordion-header {
+    background: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+  
+  .sf-accordion-content {
+    padding: 20px;
+    background: #fafafa;
+  }
+
+  .sf-line-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .sf-line-item:last-child {
+    border-bottom: none;
+  }
+  
+  .sf-item-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+  }
+  .sf-item-desc {
+    font-size: 12px;
+    color: #777;
+    margin-top: 2px;
+  }
+  
+  .sf-price {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  
+  .sf-badge {
+    background-color: #64ffda;
+    color: #004d40;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* Form Section */
+  .sf-form-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .sf-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  @media (max-width: 600px) {
+    .sf-form-grid { grid-template-columns: 1fr; }
+  }
+  
+  .sf-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .sf-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #555;
+    gap: 8px;
+  }
+
+  /* Footer Actions */
+  .sf-footer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  .btn-plain {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .btn-primary {
+    background-color: #1c5bf0;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(28, 91, 240, 0.3);
+  }
+  .btn-primary:hover {
+    background-color: #1545b5;
+  }
+
+</style>
+
+<div class="sf-wrapper">
+  
+  <!-- Header -->
+  <div class="sf-header">
+    <div class="sf-logo">Culligan <span>Water you love.</span></div>
+    <a href="/" class="sf-exit">Salir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a>
+  </div>
+
+  <div class="sf-container">
+    
+    <!-- Progress -->
+    <div class="sf-progress-bg">
+      <div class="sf-progress-fill"></div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="sf-breadcrumbs">
+      🏠 Home > CB - Core
+    </div>
+
+    <!-- Title -->
+    <h1 class="sf-title">Suscripción mensual</h1>
+    <p class="sf-subtitle">
+      <span style="font-weight: 700; color:#333">¡Buena opción!</span> Nunca dejarás de estar abastecido. <a href="#">Solicita las botellas que necesites en cada envío.</a>
+    </p>
+
+    <div class="sf-grid">
+      
+      <!-- Left Column: Product -->
+      <div class="sf-product-card">
+        <div class="sf-product-header">
+          <h2>CB Core</h2>
+          <p>Dispensador de agua embotellada</p>
+        </div>
+        <div class="sf-product-image">
+           {% if section.settings.product_image %}
+              <img src="{{ section.settings.product_image | image_url: width: 400 }}" alt="Dispensador">
+           {% else %}
+               <!-- Placeholder SVG/Image if none selected -->
+               <img src="https://cdn.shopify.com/s/files/1/0651/1601/2763/files/dispenser-placeholder.png?v=1700000000" onerror="this.src='https://placehold.co/200x400/png?text=Dispenser'; this.style.opacity=0.5" alt="Dispensador" style="max-height:300px;">
+           {% endif %}
+        </div>
+      </div>
+
+      <!-- Right Column: Details -->
+      <div class="sf-details-container">
+        
+        <!-- Accordion 1 -->
+        <div class="sf-details-panel">
+          <div class="sf-accordion-header">
+            <span>¿Qué incluye tu plan?</span>
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="sf-accordion-content">
+            
+            <!-- Item 1 -->
+            <div class="sf-line-item">
+              <div>
+                <div class="sf-item-title">24 Botellas de agua y 6 envíos</div>
+                <div class="sf-item-desc">Hasta 24 botellas de agua en un año y 6 envíos gratuitos.</div>
+              </div>
+              <div class="sf-price">20€/mes</div>
+            </div>
+
+            <!-- Item 2 -->
+             <div class="sf-line-item">
+              <div>
+                <div class="sf-item-title">Coste de instalación</div>
+                <div class="sf-item-desc">0€/mes</div>
+              </div>
+              <div class="sf-badge">GRATIS</div>
+            </div>
+
+            <!-- Item 3 -->
+             <div class="sf-line-item">
+              <div>
+                <div class="sf-item-title">Alquiler de máquina</div>
+                <div class="sf-item-desc">0€/mes</div>
+              </div>
+              <div class="sf-badge">GRATIS</div>
+            </div>
+
+            <!-- Item 4 -->
+             <div class="sf-line-item">
+              <div>
+                <div class="sf-item-title">Sin fianza</div>
+                <div class="sf-item-desc">Este producto no requiere fianza</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Accordion 2 (Collapsed Styled) -->
+        <div class="sf-details-panel" style="margin-top: 15px;">
+           <div class="sf-accordion-header" style="border-bottom:none">
+            <span>Detalles del contrato</span>
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" transform="rotate(-90 6 3.5)"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="sf-form-section">
+      <h3>Guarda tu presupuesto</h3>
+      <div class="sf-form-grid">
+         <input type="text" class="sf-input" placeholder="Nombre">
+         <input type="text" class="sf-input" placeholder="Teléfono">
+         <input type="email" class="sf-input" placeholder="Email (opcional)">
+      </div>
+      <label class="sf-checkbox-wrapper">
+        <input type="checkbox"> Quiero recibir emails con noticias y ofertas.
+      </label>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="sf-footer-actions">
+       <button class="btn-plain"> &lt; Atrás</button>
+       <button class="btn-primary">Pagar suscripción &gt;</button>
+    </div>
+
+  </div>
+</div>
