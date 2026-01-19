@@ -1,0 +1,18 @@
+{
+  "name": "culligan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "export $(grep -v '^#' .env | xargs) && shopify theme dev --store=culligandev.myshopify.com --store-password=$SHOPIFY_STORE_PASSWORD",
+    "push": "shopify theme push --store=culligandev.myshopify.com",
+    "pull": "shopify theme pull --store=culligandev.myshopify.com"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@shopify/cli": "^3.88.1"
+  }
+}
