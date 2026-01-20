@@ -8,8 +8,7 @@
     <div class="page-width">
       <div class="cb-hero__grid">
         <div class="cb-hero__bg-text">
-          CB<br>
-          Core
+          {{ section.settings.hero_bg_text | default: 'CB<br>Core' }}
         </div>
         <div class="cb-hero__content">
           <div class="cb-hero__product">
@@ -30,8 +29,8 @@
             <div class="cb-hero__desc">
               {{ section.settings.hero_desc | default: 'Diseño, tecnología y comodidad<br>en un mismo lugar.' }}
             </div>
-            <a href="{{ section.settings.cta_link | default: '/products/cb-core' }}" class="cb-btn">
-              {{- section.settings.cta_text | default: 'Ver más' -}}
+            <a href="{{ section.settings.hero_cta_link | default: '/products/cb-core' }}" class="cb-btn">
+              {{- section.settings.hero_cta_text | default: 'Ver más' -}}
             </a>
           </div>
           <div class="cb-hero__product-secondary">
@@ -75,13 +74,17 @@
   {% comment %} Marquee Section {% endcomment %}
   <div class="cb-marquee">
     <div class="cb-marquee__content">
-      <span
-        >AGUA PURA AL ALCANCE DE TU MANO <span class="cb-drop">💧</span> AGUA PURA AL ALCANCE DE TU MANO
-        <span class="cb-drop">💧</span> AGUA PURA AL ALCANCE DE TU MANO <span class="cb-drop">💧</span></span
+      <span>
+        {{- section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span></span
       >
-      <span
-        >AGUA PURA AL ALCANCE DE TU MANO <span class="cb-drop">💧</span> AGUA PURA AL ALCANCE DE TU MANO
-        <span class="cb-drop">💧</span> AGUA PURA AL ALCANCE DE TU MANO <span class="cb-drop">💧</span></span
+      <span>
+        {{- section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span></span
       >
     </div>
   </div>
@@ -92,7 +95,9 @@
       <div class="cb-comfort__content">
         <h2>{{ section.settings.comfort_title | default: 'Más comodidad, más<br>hidratación, más bienestar.' }}</h2>
         <div class="cb-body-text">{{ section.settings.comfort_text }}</div>
-        <a href="{{ section.settings.cta_link }}" class="cb-btn cb-btn--outline">Más información</a>
+        <a href="{{ section.settings.comfort_cta_link }}" class="cb-btn cb-btn--outline">
+          {{- section.settings.comfort_cta_text | default: 'Más información' -}}
+        </a>
       </div>
       <div class="cb-comfort__image">
         {% if section.settings.comfort_image != blank %}
@@ -107,8 +112,7 @@
   {% comment %} Sustainable Section {% endcomment %}
   <section class="cb-sustainable">
     <div class="cb-sustainable__bg-text">
-      Sostenible<br>
-      Elegante
+      {{ section.settings.sustainable_bg_text | default: 'Sostenible<br>Elegante' }}
     </div>
     <div class="page-width cb-sustainable__grid">
       <div class="cb-sustainable__image">
@@ -143,11 +147,13 @@
 
   {% comment %} Why Culligan {% endcomment %}
   <section class="cb-why page-width">
-    <div class="cb-why__header">¿Por qué Culligan?</div>
+    <div class="cb-why__header">{{ section.settings.why_title | default: '¿Por qué Culligan?' }}</div>
+    <div class="cb-why__text">{{ section.settings.why_text | default: 'Tranquilidad' }}</div>
     <div class="cb-why__big-text">
-      Tranquilidad<br>
-      <span class="cb-highlight">Experiencia</span><br>
-      Innovación
+      {{ section.settings.why_line_1 | default: 'Tranquilidad' -}}
+      <br>
+      <span class="cb-highlight">{{ section.settings.why_line_2 | default: 'Experiencia' }}</span><br>
+      {{ section.settings.why_line_3 | default: 'Innovación' }}
     </div>
     <div class="cb-why__floating-images">
       <!-- Abstract bubbles/drops here -->
@@ -156,27 +162,42 @@
 
   {% comment %} Characteristics {% endcomment %}
   <section class="cb-chars page-width">
-    <h2 class="cb-chars__title-bg">Características</h2>
+    <h2 class="cb-chars__title-bg">{{ section.settings.chars_title | default: 'Características' }}</h2>
     <div class="cb-chars__grid">
       <div class="cb-chars__tabs">
-        <div class="cb-tab active" data-target="measurements"><span class="cb-tab-icon">📏</span> Medidas</div>
-        <div class="cb-tab" data-target="weight"><span class="cb-tab-icon">⚖️</span> Peso</div>
+        <div class="cb-tab active" data-target="measurements">
+          <span class="cb-tab-icon">📏</span> {{ section.settings.chars_tab_1_title | default: 'Medidas' }}
+        </div>
+        <div class="cb-tab" data-target="weight">
+          <span class="cb-tab-icon">⚖️</span> {{ section.settings.chars_tab_2_title | default: 'Peso' }}
+        </div>
 
         <div class="cb-tab-content active" id="measurements">
           <div class="cb-spec-row">
-            <span>Alto (A)</span>
-            <strong>104 cm</strong>
+            <span>{{ section.settings.chars_dim_1_label | default: 'Alto (A)' }}</span>
+            <strong>{{ section.settings.chars_dim_1_value | default: '104 cm' }}</strong>
           </div>
           <div class="cb-spec-row">
-            <span>Ancho (B)</span>
-            <strong>31 cm</strong>
+            <span>{{ section.settings.chars_dim_2_label | default: 'Ancho (B)' }}</span>
+            <strong>{{ section.settings.chars_dim_2_value | default: '31 cm' }}</strong>
           </div>
           <div class="cb-spec-row">
-            <span>Profundo (C)</span>
-            <strong>36 cm</strong>
+            <span>{{ section.settings.chars_dim_3_label | default: 'Profundo (C)' }}</span>
+            <strong>{{ section.settings.chars_dim_3_value | default: '36 cm' }}</strong>
           </div>
         </div>
-        <a href="#" class="cb-btn cb-btn--small">Ficha técnica</a>
+
+        <!-- Placeholder content for Weight tab -->
+        <div class="cb-tab-content" id="weight" style="display:none;">
+          <div class="cb-spec-row">
+            <span>Peso Neto</span>
+            <strong>{{ section.settings.chars_weight_value | default: '18 kg' }}</strong>
+          </div>
+        </div>
+
+        <a href="{{ section.settings.chars_btn_link }}" class="cb-btn cb-btn--small">
+          {{- section.settings.chars_btn_text | default: 'Ficha técnica' -}}
+        </a>
       </div>
       <div class="cb-chars__image">
         {% if section.settings.chars_image != blank %}
@@ -193,10 +214,11 @@
     <div class="page-width cb-cta-bottom__container">
       <div class="cb-cta-bottom__content">
         <h2>
-          Paga SÓLO por el<br>
-          agua que consumes.
+          {{ section.settings.bottom_cta_title | default: 'Paga SÓLO por el<br>agua que consumes.' }}
         </h2>
-        <a href="{{ section.settings.cta_link }}" class="cb-btn cb-btn--green">Más info</a>
+        <a href="{{ section.settings.bottom_cta_link }}" class="cb-btn cb-btn--green">
+          {{- section.settings.bottom_cta_text | default: 'Más info' -}}
+        </a>
       </div>
       <div class="cb-cta-bottom__image">
         {% if section.settings.bottom_image != blank %}
@@ -617,16 +639,11 @@
         tab.classList.add('active');
 
         // Hide all contents
-        // Find parent grid then find contents?
-        // Simplified for this section:
         const container = tab.closest('.cb-chars__grid');
         container.querySelectorAll('.cb-tab-content').forEach((c) => (c.style.display = 'none'));
 
         // Show target
         const target = tab.dataset.target;
-        // Since we only have static content for measurements in the example,
-        // in a real scenario we'd have IDs or data-attributes matching.
-        // For now, let's assume the ID matches.
         const content = document.getElementById(target);
         if (content) content.style.display = 'block';
       });
@@ -643,6 +660,12 @@
       "content": "Hero Section"
     },
     {
+      "type": "html",
+      "id": "hero_bg_text",
+      "label": "Hero Background Text",
+      "default": "CB<br>Core"
+    },
+    {
       "type": "image_picker",
       "id": "hero_image",
       "label": "Primary Product Image"
@@ -654,23 +677,97 @@
       "default": "Dispensador de Agua CB Core"
     },
     {
+      "type": "richtext",
+      "id": "hero_desc",
+      "label": "Hero Description",
+      "default": "<p>Diseño, tecnología y comodidad<br>en un mismo lugar.</p>"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_text",
+      "label": "Hero Button Text",
+      "default": "Ver más"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta_link",
+      "label": "Hero Button Link"
+    },
+    {
       "type": "image_picker",
       "id": "hero_image_2",
       "label": "Secondary Product Image"
     },
     {
       "type": "header",
-      "content": "Content"
+      "content": "Hydration Section"
     },
     {
       "type": "image_picker",
       "id": "hydration_image",
-      "label": "Hydration Section Image"
+      "label": "Hydration Image"
+    },
+    {
+      "type": "text",
+      "id": "hydration_title",
+      "label": "Hydration Title",
+      "default": "Mantenerse hidratado nunca ha sido tan fácil."
+    },
+    {
+      "type": "richtext",
+      "id": "hydration_text",
+      "label": "Hydration Text"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Section"
+    },
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee Text",
+      "default": "AGUA PURA AL ALCANCE DE TU MANO"
+    },
+    {
+      "type": "header",
+      "content": "Comfort Section"
+    },
+    {
+      "type": "text",
+      "id": "comfort_title",
+      "label": "Comfort Title",
+      "default": "Más comodidad, más hidratación, más bienestar."
+    },
+    {
+      "type": "richtext",
+      "id": "comfort_text",
+      "label": "Comfort Text"
+    },
+    {
+      "type": "text",
+      "id": "comfort_cta_text",
+      "label": "Comfort Button Text",
+      "default": "Más información"
+    },
+    {
+      "type": "url",
+      "id": "comfort_cta_link",
+      "label": "Comfort Button Link"
     },
     {
       "type": "image_picker",
       "id": "comfort_image",
-      "label": "Comfort Section Image"
+      "label": "Comfort Image"
+    },
+    {
+      "type": "header",
+      "content": "Sustainable Section"
+    },
+    {
+      "type": "html",
+      "id": "sustainable_bg_text",
+      "label": "Sustainable Background Text",
+      "default": "Sostenible<br>Elegante"
     },
     {
       "type": "image_picker",
@@ -698,9 +795,127 @@
       "label": "Sustainable Point 4"
     },
     {
+      "type": "header",
+      "content": "Why Culligan"
+    },
+    {
+      "type": "text",
+      "id": "why_title",
+      "label": "Why Section Title",
+      "default": "¿Por qué Culligan?"
+    },
+    {
+      "type": "richtext",
+      "id": "why_text",
+      "label": "Why Text"
+    },
+    {
+      "type": "text",
+      "id": "why_line_1",
+      "label": "Big Text Line 1",
+      "default": "Tranquilidad"
+    },
+    {
+      "type": "text",
+      "id": "why_line_2",
+      "label": "Big Text Line 2 (Highlighted)",
+      "default": "Experiencia"
+    },
+    {
+      "type": "text",
+      "id": "why_line_3",
+      "label": "Big Text Line 3",
+      "default": "Innovación"
+    },
+    {
+      "type": "header",
+      "content": "Characteristics"
+    },
+    {
+      "type": "text",
+      "id": "chars_title",
+      "label": "Characteristics Title",
+      "default": "Características"
+    },
+    {
       "type": "image_picker",
       "id": "chars_image",
       "label": "Characteristics Image"
+    },
+    {
+      "type": "text",
+      "id": "chars_tab_1_title",
+      "label": "Tab 1 Title",
+      "default": "Medidas"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_1_label",
+      "label": "Dimension 1 Label",
+      "default": "Alto (A)"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_1_value",
+      "label": "Dimension 1 Value",
+      "default": "104 cm"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_2_label",
+      "label": "Dimension 2 Label",
+      "default": "Ancho (B)"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_2_value",
+      "label": "Dimension 2 Value",
+      "default": "31 cm"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_3_label",
+      "label": "Dimension 3 Label",
+      "default": "Profundo (C)"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_3_value",
+      "label": "Dimension 3 Value",
+      "default": "36 cm"
+    },
+    {
+      "type": "text",
+      "id": "chars_tab_2_title",
+      "label": "Tab 2 Title",
+      "default": "Peso"
+    },
+    {
+      "type": "text",
+      "id": "chars_weight_value",
+      "label": "Weight Value",
+      "default": "18 kg"
+    },
+    {
+      "type": "text",
+      "id": "chars_btn_text",
+      "label": "Spec Sheet Button Text",
+      "default": "Ficha técnica"
+    },
+    {
+      "type": "url",
+      "id": "chars_btn_link",
+      "label": "Spec Sheet Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Bottom CTA"
+    },
+    {
+      "type": "html",
+      "id": "bottom_cta_title",
+      "label": "Bottom CTA Title",
+      "default": "Paga SÓLO por el<br>agua que consumes."
     },
     {
       "type": "image_picker",
@@ -708,8 +923,14 @@
       "label": "Bottom CTA Image"
     },
     {
+      "type": "text",
+      "id": "bottom_cta_text",
+      "label": "Button Text",
+      "default": "Más info"
+    },
+    {
       "type": "url",
-      "id": "cta_link",
+      "id": "bottom_cta_link",
       "label": "Button Link"
     }
   ],
