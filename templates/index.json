@@ -23,7 +23,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 0,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -53,6 +53,76 @@
             "custom_class": "hero-section"
           },
           "blocks": {
+            "group_3mhK4A": {
+              "type": "group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-end",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fill",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_class": "group-image-hero"
+              },
+              "blocks": {
+                "image_KQk4nP": {
+                  "type": "image",
+                  "name": "t:names.image",
+                  "settings": {
+                    "image": "shopify://shop_images/Captura_desde_2026-01-21_09-11-14.png",
+                    "link": "",
+                    "image_ratio": "adapt",
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0,
+                    "custom_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "image_KQk4nP"
+              ]
+            },
             "group_ByX7GD": {
               "type": "group",
               "name": "t:names.group",
@@ -117,6 +187,7 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
+                    "custom_class": ""
                   },
                   "blocks": {}
                 },
@@ -124,82 +195,23 @@
                   "type": "solution-finder",
                   "settings": {
                     "title": "¿Cómo podemos ayudarte?",
-                    "padding_top": 24
-                  }
-                }
-              },
-              "block_order": [
-                "text_hP3RN9",
-                "solution_finder_H7k8mL"
-              ]
-            },
-            "group_3mhK4A": {
-              "type": "group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-end",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fill",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "custom_class": "group-image-hero"
-              },
-              "blocks": {
-                "image_KQk4nP": {
-                  "type": "image",
-                  "name": "t:names.image",
-                  "settings": {
-                    "image": "shopify://shop_images/Captura_desde_2026-01-21_09-11-14.png",
-                    "link": "",
-                    "image_ratio": "adapt",
-                    "width": "fill",
-                    "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
-                    "height": "fit",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "max_width": 650,
+                    "label_1": "Para",
+                    "options_1": "Para mi Hogar, Para mi Negocio",
+                    "label_2": "busco...",
+                    "options_2": "Servicio de reparto de agua, Filtros de agua",
+                    "btn1_label": "Encuentra una solución",
+                    "btn2_label": "Comprar productos",
+                    "btn2_link": "",
+                    "padding_top": 24,
+                    "padding_bottom": 0
                   },
                   "blocks": {}
                 }
               },
               "block_order": [
-                "image_KQk4nP"
+                "text_hP3RN9",
+                "solution_finder_H7k8mL"
               ]
             }
           },
@@ -238,7 +250,8 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "custom_class": ""
       }
     },
     "section_jViAkr": {
@@ -281,7 +294,8 @@
             "padding-block-start": 14,
             "padding-block-end": 14,
             "padding-inline-start": 14,
-            "padding-inline-end": 14
+            "padding-inline-end": 14,
+            "custom_class": ""
           },
           "blocks": {
             "group_pXdqjb": {
@@ -321,15 +335,17 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "custom_class": ""
               },
               "blocks": {
                 "icon_wUfAWF": {
                   "type": "icon",
                   "name": "t:names.icon",
                   "settings": {
-                    "icon": "price_tag",
-                    "width": 24,
+                    "icon": "leaf",
+                    "image_upload": "shopify://shop_images/Captura_desde_2026-01-22_07-44-49.png",
+                    "width": 30,
                     "link": "",
                     "open_in_new_tab": false
                   },
@@ -357,7 +373,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "custom_class": ""
                   },
                   "blocks": {}
                 },
@@ -383,7 +400,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "custom_class": ""
                   },
                   "blocks": {}
                 }
@@ -452,7 +470,8 @@
             "padding-block-start": 14,
             "padding-block-end": 14,
             "padding-inline-start": 14,
-            "padding-inline-end": 14
+            "padding-inline-end": 14,
+            "custom_class": ""
           },
           "blocks": {
             "group_zpyhBB": {
@@ -492,7 +511,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "custom_class": ""
               },
               "blocks": {
                 "icon_L9XbA6": {
@@ -500,7 +520,8 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "price_tag",
-                    "width": 24,
+                    "image_upload": "shopify://shop_images/Captura_desde_2026-01-22_07-45-26.png",
+                    "width": 30,
                     "link": "",
                     "open_in_new_tab": false
                   },
@@ -528,7 +549,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "custom_class": ""
                   },
                   "blocks": {}
                 },
@@ -554,7 +576,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "custom_class": ""
                   },
                   "blocks": {}
                 }
@@ -623,7 +646,8 @@
             "padding-block-start": 14,
             "padding-block-end": 14,
             "padding-inline-start": 14,
-            "padding-inline-end": 14
+            "padding-inline-end": 14,
+            "custom_class": ""
           },
           "blocks": {
             "group_7YprDT": {
@@ -663,7 +687,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "custom_class": ""
               },
               "blocks": {
                 "icon_48pqh3": {
@@ -671,7 +696,8 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "price_tag",
-                    "width": 24,
+                    "image_upload": "shopify://shop_images/Captura_desde_2026-01-22_07-45-49.png",
+                    "width": 30,
                     "link": "",
                     "open_in_new_tab": false
                   },
@@ -699,7 +725,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "custom_class": ""
                   },
                   "blocks": {}
                 },
@@ -725,7 +752,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "custom_class": ""
                   },
                   "blocks": {}
                 }
@@ -775,7 +803,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
+        "gap": 20,
         "section_width": "page-width",
         "section_height": "custom",
         "section_height_custom": 40,
@@ -792,7 +820,8 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 10,
-        "padding-block-end": 10
+        "padding-block-end": 10,
+        "custom_class": ""
       }
     }
   },

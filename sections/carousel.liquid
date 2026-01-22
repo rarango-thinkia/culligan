@@ -1,5 +1,3 @@
-
-
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="
@@ -24,7 +22,8 @@
 {% schema %}
 {
   "name": "t:names.carousel",
-  "disabled_on": {
+  "enabled_on": {
+    "templates": ["*"],
     "groups": ["header", "footer"]
   },
   "settings": [

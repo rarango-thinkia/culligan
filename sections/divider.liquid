@@ -1,5 +1,3 @@
-
-
 {% assign full_width = false %}
 
 {% if section.settings.width_percent == 100 and section.settings.section_width == 'full-width' %}
@@ -17,6 +15,10 @@
 {% schema %}
 {
   "name": "t:names.divider",
+  "enabled_on": {
+    "templates": ["*"],
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "color_scheme",

@@ -83,7 +83,7 @@
 
   .solution-finder-block-{{ block.id }} .solution-finder__btn {
     border-radius: 100px !important;
-    padding: 1.1rem 2.2rem !important;
+    padding: 0.7rem 2.2rem !important;
     font-size: 1rem !important;
     font-weight: 600 !important;
     border: none !important;
@@ -102,8 +102,11 @@
   }
 
   .solution-finder-block-{{ block.id }} .solution-finder__btn-primary {
-    background-color: #2a68fe !important;
+    background-color: #2a68fe;
     color: #ffffff !important;
+  }
+  .solution-finder-block-{{ block.id }} .solution-finder__btn-primary:hover {
+    background-color: #2A68FEA3;
   }
 
   .solution-finder-block-{{ block.id }} .solution-finder__btn-secondary {
