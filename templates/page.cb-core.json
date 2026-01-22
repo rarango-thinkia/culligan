@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cb_core_landing": {
+      "type": "cb-core-landing",
+      "settings": {
+        "hero_image": "shopify://shop_images/8a9a9cda22525577e447b8ca43d0ecaae7009ff2.png",
+        "hero_title": "Dispensador de Agua CB Core",
+        "hero_image_2": "shopify://shop_images/ebbf86cdc465fa9d5a8832e65cbaa9a3692f0879.png",
+        "hydration_image": "shopify://shop_images/805b5dacf5f0699ac2ab0e6f77e24c71835ccf65.png",
+        "sust_point_1": "",
+        "sust_point_2": "",
+        "sust_point_3": "",
+        "sust_point_4": "",
+        "cta_link": ""
+      }
+    }
+  },
+  "order": [
+    "cb_core_landing"
+  ]
+}

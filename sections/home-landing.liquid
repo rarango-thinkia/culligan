@@ -1,0 +1,436 @@
+{% comment %}
+  Home Landing Section
+{% endcomment %}
+
+<div class="hl-wrapper">
+  {% comment %} Hero Section {% endcomment %}
+  <section class="hl-hero">
+    <div class="hl-hero__container page-width">
+      <div class="hl-hero__content">
+        <h1 class="hl-hero__title">
+          {{ section.settings.title | default: 'Mejor agua para todos,<br>en cualquier lugar.' }}
+        </h1>
+        <p class="hl-hero__subtitle">{{ section.settings.subtitle | default: '¿Cómo podemos ayudarte?' }}</p>
+
+        <div class="hl-hero__form">
+          <div class="hl-form-group">
+            <label>Para</label>
+            <div class="hl-select-wrapper">
+              <select>
+                <option>Para mi Hogar</option>
+                <option>Para mi Negocio</option>
+              </select>
+            </div>
+          </div>
+          <div class="hl-form-group">
+            <label>busco...</label>
+            <div class="hl-select-wrapper">
+              <select>
+                <option>Servicio de reparto de agua</option>
+                <option>Tratamiento de agua</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="hl-hero__actions">
+          <a href="{{ section.settings.btn_primary_link }}" class="hl-btn hl-btn--primary">
+            {{- section.settings.btn_primary_text | default: 'Encuentra una solución' -}}
+          </a>
+          <a href="{{ section.settings.btn_secondary_link }}" class="hl-btn hl-btn--dark">
+            <span class="hl-icon-cart">🛒</span>
+            {{ section.settings.btn_secondary_text | default: 'Comprar productos' }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hl-hero__image-container">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', class: 'hl-hero__img' }}
+      {% else %}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'hl-hero__img placeholder-svg' }}
+      {% endif %}
+    </div>
+  </section>
+
+  {% comment %} Cards Section {% endcomment %}
+  <section class="hl-cards">
+    <div class="page-width">
+      <div class="hl-cards__grid">
+        {% for block in section.blocks %}
+          <div class="hl-card">
+            <div class="hl-card__icon">
+              {% if block.settings.icon != blank %}
+                {{ block.settings.icon | image_url: width: 40 | image_tag: loading: 'lazy' }}
+              {% else %}
+                <span class="hl-icon-placeholder">
+                  {% if block.settings.title contains 'Hogar' -%}
+                    🏠
+                  {% elsif block.settings.title contains 'Negocio' -%}
+                    🏢
+                  {% else -%}
+                    🏭
+                  {%- endif %}
+                </span>
+              {% endif %}
+            </div>
+            <h3 class="hl-card__title">{{ block.settings.title }}</h3>
+            <p class="hl-card__text">{{ block.settings.text }}</p>
+            <a href="{{ block.settings.link }}" class="hl-card__link">
+              {{- block.settings.link_text | default: 'Visitar página' }}
+              <span class="arrow">></span></a
+            >
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% style %}
+  .hl-wrapper {
+    font-family: var(--font-body-family);
+    color: #001e62;
+    overflow-x: hidden;
+  }
+
+  /* Utils */
+  .page-width {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Buttons */
+  .hl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-size: 1rem;
+    gap: 8px;
+  }
+  .hl-btn--primary {
+    background: #2a68fe;
+    color: white;
+    border: 1px solid #2a68fe;
+  }
+  .hl-btn--primary:hover {
+    background: #1c55d9;
+  }
+  .hl-btn--dark {
+    background: #001e62;
+    color: white;
+    border: 1px solid #001e62;
+  }
+  .hl-btn--dark:hover {
+    background: #00154a;
+  }
+
+  /* Hero */
+  .hl-hero {
+    display: flex;
+    min-height: 600px;
+    position: relative;
+    background: white;
+  }
+  .hl-hero__container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    z-index: 2;
+  }
+  .hl-hero__image-container {
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+  }
+  .hl-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hl-hero__content {
+    max-width: 600px;
+  }
+
+  .hl-hero__title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #001e62;
+    margin-bottom: 24px;
+  }
+  .hl-hero__subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  /* Hero Form */
+  .hl-hero__form {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .hl-form-group {
+    flex: 1;
+  }
+  .hl-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .hl-select-wrapper {
+    position: relative;
+  }
+  .hl-select-wrapper select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none;
+    background: white;
+    font-size: 1rem;
+    color: #333;
+  }
+  .hl-select-wrapper::after {
+    content: '⌄';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  .hl-hero__actions {
+    display: flex;
+    gap: 16px;
+  }
+
+  /* Cards Section */
+  .hl-cards {
+    background-color: #eeeeee;
+    padding: 80px 0;
+  }
+  .hl-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .hl-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s;
+    min-height: 300px;
+  }
+  .hl-card:hover {
+    transform: translateY(-5px);
+  }
+  .hl-card__icon {
+    margin-bottom: 24px;
+    width: 48px;
+    height: 48px;
+  }
+  .hl-card__icon img,
+  .hl-card__icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .hl-icon-placeholder {
+    font-size: 2rem;
+  }
+
+  .hl-card__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #001e62;
+  }
+  .hl-card__text {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: auto; /* Push link to bottom */
+    color: #333;
+  }
+  .hl-card__link {
+    margin-top: 24px;
+    color: #2a68fe;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .hl-card__link:hover {
+    text-decoration: underline;
+  }
+  .hl-card__link .arrow {
+    font-size: 1.2rem;
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 990px) {
+    .hl-hero {
+      flex-direction: column;
+    }
+    .hl-hero__container {
+      width: 100%;
+      order: 2; /* Content below image on mobile usually, or keep atop? Image provided shows side-by-side desktop. Usually mobile stacks content-first or image-first. Let's stack image top or content top? Content top is better for SEO/UX usually but "hero" visuals matter. Let's keep content top for now as it has the inputs. */
+      order: 0;
+      padding: 40px 20px;
+    }
+    .hl-hero__image-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      order: 1; /* Image below content? Or above? Let's put image below content for this explicit layout so users see the form first? Or image first to set mood. Let's do Image first to resemble standard mobile heroes, BUT the form is high priority. Let's stick to standard flow: Content then Image. */
+    }
+    .hl-hero__form {
+      flex-direction: column;
+    }
+    .hl-hero__actions {
+      flex-direction: column;
+    }
+    .hl-btn {
+      width: 100%;
+    }
+    .hl-cards__grid {
+      grid-template-columns: 1fr;
+    }
+    .hl-hero__title {
+      font-size: 2.5rem;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Home Landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Hero Title",
+      "default": "Mejor agua para todos, en cualquier lugar."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Hero Subtitle",
+      "default": "¿Cómo podemos ayudarte?"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "btn_primary_text",
+      "label": "Primary Button Text",
+      "default": "Encuentra una solución"
+    },
+    {
+      "type": "url",
+      "id": "btn_primary_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_secondary_text",
+      "label": "Secondary Button Text",
+      "default": "Comprar productos"
+    },
+    {
+      "type": "url",
+      "id": "btn_secondary_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Hogares"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Soluciones sostenibles de agua potable..."
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Visitar página"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Landing",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Hogares",
+            "text": "Soluciones sostenibles de agua potable y descalcificadores de agua para tu hogar."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Negocios",
+            "text": "Soluciones de hidratación que proporcionan agua segura y sostenible para una amplia gama de sectores."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Comercial e Industrial",
+            "text": "Soluciones de tratamiento de agua para una variedad de aplicaciones comerciales e industriales."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

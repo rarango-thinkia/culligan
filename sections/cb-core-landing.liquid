@@ -1,0 +1,943 @@
+{% comment %}
+  CB Core Landing Page Section
+{% endcomment %}
+
+<div class="cb-core-wrapper">
+  {% comment %} Hero Section {% endcomment %}
+  <section class="cb-hero">
+    <div class="page-width">
+      <div class="cb-hero__grid">
+        <div class="cb-hero__bg-text">
+          {{ section.settings.hero_bg_text | default: 'CB<br>Core' }}
+        </div>
+        <div class="cb-hero__content">
+          <div class="cb-hero__product">
+            {% if section.settings.hero_image != blank %}
+              {{
+                section.settings.hero_image
+                | image_url: width: 800
+                | image_tag: loading: 'lazy', class: 'cb-hero__img'
+              }}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'cb-hero__img placeholder-svg' }}
+            {% endif %}
+          </div>
+          <div class="cb-hero__info">
+            <h1 class="cb-hero__title">
+              {{ section.settings.hero_title | default: 'Dispensador de<br>Agua CB Core' }}
+            </h1>
+            <div class="cb-hero__desc">
+              {{ section.settings.hero_desc | default: 'Diseño, tecnología y comodidad<br>en un mismo lugar.' }}
+            </div>
+            <a href="{{ section.settings.hero_cta_link | default: '/products/cb-core' }}" class="cb-btn">
+              {{- section.settings.hero_cta_text | default: 'Ver más' -}}
+            </a>
+          </div>
+          <div class="cb-hero__product-secondary">
+            {% if section.settings.hero_image_2 != blank %}
+              {{
+                section.settings.hero_image_2
+                | image_url: width: 600
+                | image_tag: loading: 'lazy', class: 'cb-hero__img-2'
+              }}
+            {% else %}
+              {{ 'product-2' | placeholder_svg_tag: 'cb-hero__img-2 placeholder-svg' }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Hydration Section {% endcomment %}
+  <section class="cb-hydration page-width">
+    <div class="cb-hydration__grid">
+      <div class="cb-hydration__image">
+        {% if section.settings.hydration_image != blank %}
+          {{ section.settings.hydration_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      <div class="cb-hydration__content">
+        <h2>{{ section.settings.hydration_title | default: 'Mantenerse hidratado<br>nunca ha sido tan fácil.' }}</h2>
+        <div class="cb-body-text">
+          {{
+            section.settings.hydration_text
+            | default: '<p>Un suministro ilimitado de agua fresca y saludable siempre a tu alcance...</p>'
+          }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Marquee Section {% endcomment %}
+  <div class="cb-marquee">
+    <div class="cb-marquee__content">
+      <span>
+        {{- section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span></span
+      >
+      <span>
+        {{- section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+        <span class="cb-drop">💧</span></span
+      >
+    </div>
+  </div>
+
+  {% comment %} Comfort Section {% endcomment %}
+  <section class="cb-comfort page-width">
+    <div class="cb-comfort__grid">
+      <div class="cb-comfort__content">
+        <h2>{{ section.settings.comfort_title | default: 'Más comodidad, más<br>hidratación, más bienestar.' }}</h2>
+        <div class="cb-body-text">{{ section.settings.comfort_text }}</div>
+        <a href="{{ section.settings.comfort_cta_link }}" class="cb-btn cb-btn--outline">
+          {{- section.settings.comfort_cta_text | default: 'Más información' -}}
+        </a>
+      </div>
+      <div class="cb-comfort__image">
+        {% if section.settings.comfort_image != blank %}
+          {{ section.settings.comfort_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Sustainable Section {% endcomment %}
+  <section class="cb-sustainable">
+    <div class="cb-sustainable__bg-text">
+      {{ section.settings.sustainable_bg_text | default: 'Sostenible<br>Elegante' }}
+    </div>
+    <div class="page-width cb-sustainable__grid">
+      <div class="cb-sustainable__image">
+        {% if section.settings.sustainable_image != blank %}
+          {{ section.settings.sustainable_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {% else %}
+          <div class="placeholder-water-splash"></div>
+        {% endif %}
+      </div>
+      <div class="cb-sustainable__list">
+        <ul>
+          <li>
+            <span class="cb-icon-drop">💧</span>
+            {{ section.settings.sust_point_1 | default: 'Reduce el uso de botellas de plástico...' }}
+          </li>
+          <li>
+            <span class="cb-icon-drop">💧</span>
+            {{ section.settings.sust_point_2 | default: 'Menor huella de carbono...' }}
+          </li>
+          <li>
+            <span class="cb-icon-drop">💧</span>
+            {{ section.settings.sust_point_3 | default: 'Diseño elegante y moderno...' }}
+          </li>
+          <li>
+            <span class="cb-icon-drop">💧</span>
+            {{ section.settings.sust_point_4 | default: 'Agua filtrada al instante...' }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Why Culligan {% endcomment %}
+  <section class="cb-why page-width">
+    <div class="cb-why__header">{{ section.settings.why_title | default: '¿Por qué Culligan?' }}</div>
+    <div class="cb-why__text">{{ section.settings.why_text | default: 'Tranquilidad' }}</div>
+    <div class="cb-why__big-text">
+      {{ section.settings.why_line_1 | default: 'Tranquilidad' -}}
+      <br>
+      <span class="cb-highlight">{{ section.settings.why_line_2 | default: 'Experiencia' }}</span><br>
+      {{ section.settings.why_line_3 | default: 'Innovación' }}
+    </div>
+    <div class="cb-why__floating-images">
+      <!-- Abstract bubbles/drops here -->
+    </div>
+  </section>
+
+  {% comment %} Characteristics {% endcomment %}
+  <section class="cb-chars page-width">
+    <h2 class="cb-chars__title-bg">{{ section.settings.chars_title | default: 'Características' }}</h2>
+    <div class="cb-chars__grid">
+      <div class="cb-chars__tabs">
+        <div class="cb-tab active" data-target="measurements">
+          <span class="cb-tab-icon">📏</span> {{ section.settings.chars_tab_1_title | default: 'Medidas' }}
+        </div>
+        <div class="cb-tab" data-target="weight">
+          <span class="cb-tab-icon">⚖️</span> {{ section.settings.chars_tab_2_title | default: 'Peso' }}
+        </div>
+
+        <div class="cb-tab-content active" id="measurements">
+          <div class="cb-spec-row">
+            <span>{{ section.settings.chars_dim_1_label | default: 'Alto (A)' }}</span>
+            <strong>{{ section.settings.chars_dim_1_value | default: '104 cm' }}</strong>
+          </div>
+          <div class="cb-spec-row">
+            <span>{{ section.settings.chars_dim_2_label | default: 'Ancho (B)' }}</span>
+            <strong>{{ section.settings.chars_dim_2_value | default: '31 cm' }}</strong>
+          </div>
+          <div class="cb-spec-row">
+            <span>{{ section.settings.chars_dim_3_label | default: 'Profundo (C)' }}</span>
+            <strong>{{ section.settings.chars_dim_3_value | default: '36 cm' }}</strong>
+          </div>
+        </div>
+
+        <!-- Placeholder content for Weight tab -->
+        <div class="cb-tab-content" id="weight" style="display:none;">
+          <div class="cb-spec-row">
+            <span>Peso Neto</span>
+            <strong>{{ section.settings.chars_weight_value | default: '18 kg' }}</strong>
+          </div>
+        </div>
+
+        <a href="{{ section.settings.chars_btn_link }}" class="cb-btn cb-btn--small">
+          {{- section.settings.chars_btn_text | default: 'Ficha técnica' -}}
+        </a>
+      </div>
+      <div class="cb-chars__image">
+        {% if section.settings.chars_image != blank %}
+          {{ section.settings.chars_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'product-4' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Bottom CTA {% endcomment %}
+  <section class="cb-cta-bottom">
+    <div class="page-width cb-cta-bottom__container">
+      <div class="cb-cta-bottom__content">
+        <h2>
+          {{ section.settings.bottom_cta_title | default: 'Paga SÓLO por el<br>agua que consumes.' }}
+        </h2>
+        <a href="{{ section.settings.bottom_cta_link }}" class="cb-btn cb-btn--green">
+          {{- section.settings.bottom_cta_text | default: 'Más info' -}}
+        </a>
+      </div>
+      <div class="cb-cta-bottom__image">
+        {% if section.settings.bottom_image != blank %}
+          {{ section.settings.bottom_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% style %}
+  /* Fonts - Assuming standard web fonts or theme fonts */
+  .cb-core-wrapper {
+    font-family: var(--font-body-family);
+    overflow-x: hidden;
+    color: #001e62; /* Deep Blue */
+    background: #ffffff;
+  }
+
+  /* Utility for content constraint */
+  .page-width {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
+  }
+
+  .cb-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 50px;
+    border: 1px solid #2a68fe;
+    color: #2a68fe;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin-top: 20px;
+    background: transparent;
+  }
+  .cb-btn:hover {
+    background: #2a68fe;
+    color: white;
+  }
+  .cb-btn--green {
+    background: #00d796;
+    border-color: #00d796;
+    color: white;
+  }
+  .cb-btn--green:hover {
+    background: #00b57e;
+  }
+  .cb-btn--small {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Hero */
+  .cb-hero {
+    position: relative;
+    padding: 60px 0;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .cb-hero__bg-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 25vw;
+    line-height: 0.8;
+    font-weight: 700;
+    color: #f0f4f8;
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .cb-hero__grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .cb-hero__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+  .cb-hero__product {
+    text-align: center;
+  }
+  .cb-hero__product img {
+    max-height: 600px;
+    width: auto;
+    max-width: 100%;
+  }
+  .cb-hero__info {
+    z-index: 1;
+    text-align: left;
+  }
+  .cb-hero__title {
+    font-size: 3rem;
+    line-height: 1.1;
+    color: #001e62;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+  .cb-hero__product-secondary {
+    text-align: center;
+  }
+  .cb-hero__product-secondary img {
+    max-height: 500px;
+    width: auto;
+    max-width: 100%;
+  }
+
+  /* Hydration */
+  .cb-hydration {
+    padding: 80px 0;
+  }
+  .cb-hydration__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .cb-hydration__image img {
+    width: 100%;
+    border-radius: 20px;
+    height: auto;
+  }
+  .cb-hydration__content h2 {
+    font-size: 2.5rem;
+    color: #001e62;
+    margin-bottom: 20px;
+  }
+
+  /* Marquee */
+  .cb-marquee {
+    background: #ffffff;
+    color: #2a68fe;
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+  .cb-marquee__content {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .cb-drop {
+    margin: 0 20px;
+  }
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Comfort */
+  .cb-comfort {
+    padding: 80px 0;
+  }
+  .cb-comfort__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .cb-comfort__content h2 {
+    font-size: 2.5rem;
+    color: #001e62;
+  }
+  .cb-comfort__image img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Sustainable */
+  .cb-sustainable {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    width: 100%;
+  }
+  .cb-sustainable__bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12vw;
+    font-weight: 800;
+    color: #f5f7fa;
+    z-index: -1;
+    line-height: 0.9;
+    text-align: center;
+    width: 100%;
+    pointer-events: none;
+  }
+  .cb-sustainable__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .cb-sustainable__image img {
+    width: 100%;
+    height: auto;
+  }
+  .cb-sustainable__list ul {
+    list-style: none;
+    padding: 0;
+  }
+  .cb-sustainable__list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .cb-icon-drop {
+    color: #2a68fe;
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+
+  /* Why */
+  .cb-why {
+    padding: 80px 0;
+    text-align: right;
+  }
+  .cb-why__header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .cb-why__big-text {
+    font-size: 5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: #7da5ff;
+    text-align: right;
+  }
+  .cb-why__big-text .cb-highlight {
+    font-weight: 300; /* Or regular */
+  }
+
+  /* Characteristics */
+  .cb-chars {
+    padding: 60px 0;
+    position: relative;
+  }
+  .cb-chars__title-bg {
+    font-size: 10vw;
+    color: #f5f7fa;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-weight: 900;
+    pointer-events: none;
+  }
+  .cb-chars__grid {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 40px;
+    background: #f9f9f9;
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 40px;
+  }
+  .cb-chars__tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .cb-chars__image img {
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+  }
+  .cb-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .cb-tab.active {
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #2a68fe;
+  }
+  .cb-tab-content {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    display: none; /* JS needed to toggle */
+  }
+  .cb-tab-content.active {
+    display: block;
+  }
+  .cb-spec-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
+  .cb-spec-row:last-child {
+    border-bottom: none;
+  }
+
+  /* Bottom CTA */
+  .cb-cta-bottom {
+    margin-top: 80px;
+    margin-bottom: 40px;
+    padding-bottom: 60px;
+  }
+  .cb-cta-bottom__container {
+    background: #001e62;
+    border-radius: 30px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+  }
+  .cb-cta-bottom__content {
+    padding: 60px;
+    color: white;
+    z-index: 2;
+  }
+  .cb-cta-bottom__content h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  .cb-cta-bottom__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .cb-hero__grid,
+    .cb-hero__content,
+    .cb-hydration__grid,
+    .cb-comfort__grid,
+    .cb-sustainable__grid,
+    .cb-chars__grid,
+    .cb-cta-bottom__container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .cb-hero__info {
+      text-align: center;
+      order: -1;
+    }
+    .cb-hero__content {
+      display: flex;
+      flex-direction: column;
+    }
+    .cb-hero__bg-text {
+      font-size: 30vw;
+      top: 100px;
+    }
+    .cb-why__big-text {
+      font-size: 3rem;
+      text-align: center;
+    }
+    .cb-why__header {
+      text-align: center;
+    }
+    .cb-chars__grid {
+      padding: 20px;
+    }
+    .cb-cta-bottom__image {
+      height: 300px;
+    }
+    .cb-hero__product img,
+    .cb-hero__product-secondary img {
+      max-height: 300px;
+    }
+  }
+{% endstyle %}
+
+<!-- Simple Script for Tabs -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.cb-tab');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        // Remove active from all siblings
+        tab.parentNode.querySelectorAll('.cb-tab').forEach((t) => t.classList.remove('active'));
+        // Add active to click
+        tab.classList.add('active');
+
+        // Hide all contents
+        const container = tab.closest('.cb-chars__grid');
+        container.querySelectorAll('.cb-tab-content').forEach((c) => (c.style.display = 'none'));
+
+        // Show target
+        const target = tab.dataset.target;
+        const content = document.getElementById(target);
+        if (content) content.style.display = 'block';
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "CB Core Landing",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "html",
+      "id": "hero_bg_text",
+      "label": "Hero Background Text",
+      "default": "CB<br>Core"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Primary Product Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Dispensador de Agua CB Core"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_desc",
+      "label": "Hero Description",
+      "default": "<p>Diseño, tecnología y comodidad<br>en un mismo lugar.</p>"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_text",
+      "label": "Hero Button Text",
+      "default": "Ver más"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta_link",
+      "label": "Hero Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_2",
+      "label": "Secondary Product Image"
+    },
+    {
+      "type": "header",
+      "content": "Hydration Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hydration_image",
+      "label": "Hydration Image"
+    },
+    {
+      "type": "text",
+      "id": "hydration_title",
+      "label": "Hydration Title",
+      "default": "Mantenerse hidratado nunca ha sido tan fácil."
+    },
+    {
+      "type": "richtext",
+      "id": "hydration_text",
+      "label": "Hydration Text"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Section"
+    },
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee Text",
+      "default": "AGUA PURA AL ALCANCE DE TU MANO"
+    },
+    {
+      "type": "header",
+      "content": "Comfort Section"
+    },
+    {
+      "type": "text",
+      "id": "comfort_title",
+      "label": "Comfort Title",
+      "default": "Más comodidad, más hidratación, más bienestar."
+    },
+    {
+      "type": "richtext",
+      "id": "comfort_text",
+      "label": "Comfort Text"
+    },
+    {
+      "type": "text",
+      "id": "comfort_cta_text",
+      "label": "Comfort Button Text",
+      "default": "Más información"
+    },
+    {
+      "type": "url",
+      "id": "comfort_cta_link",
+      "label": "Comfort Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "comfort_image",
+      "label": "Comfort Image"
+    },
+    {
+      "type": "header",
+      "content": "Sustainable Section"
+    },
+    {
+      "type": "html",
+      "id": "sustainable_bg_text",
+      "label": "Sustainable Background Text",
+      "default": "Sostenible<br>Elegante"
+    },
+    {
+      "type": "image_picker",
+      "id": "sustainable_image",
+      "label": "Sustainable Image"
+    },
+    {
+      "type": "text",
+      "id": "sust_point_1",
+      "label": "Sustainable Point 1"
+    },
+    {
+      "type": "text",
+      "id": "sust_point_2",
+      "label": "Sustainable Point 2"
+    },
+    {
+      "type": "text",
+      "id": "sust_point_3",
+      "label": "Sustainable Point 3"
+    },
+    {
+      "type": "text",
+      "id": "sust_point_4",
+      "label": "Sustainable Point 4"
+    },
+    {
+      "type": "header",
+      "content": "Why Culligan"
+    },
+    {
+      "type": "text",
+      "id": "why_title",
+      "label": "Why Section Title",
+      "default": "¿Por qué Culligan?"
+    },
+    {
+      "type": "richtext",
+      "id": "why_text",
+      "label": "Why Text"
+    },
+    {
+      "type": "text",
+      "id": "why_line_1",
+      "label": "Big Text Line 1",
+      "default": "Tranquilidad"
+    },
+    {
+      "type": "text",
+      "id": "why_line_2",
+      "label": "Big Text Line 2 (Highlighted)",
+      "default": "Experiencia"
+    },
+    {
+      "type": "text",
+      "id": "why_line_3",
+      "label": "Big Text Line 3",
+      "default": "Innovación"
+    },
+    {
+      "type": "header",
+      "content": "Characteristics"
+    },
+    {
+      "type": "text",
+      "id": "chars_title",
+      "label": "Characteristics Title",
+      "default": "Características"
+    },
+    {
+      "type": "image_picker",
+      "id": "chars_image",
+      "label": "Characteristics Image"
+    },
+    {
+      "type": "text",
+      "id": "chars_tab_1_title",
+      "label": "Tab 1 Title",
+      "default": "Medidas"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_1_label",
+      "label": "Dimension 1 Label",
+      "default": "Alto (A)"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_1_value",
+      "label": "Dimension 1 Value",
+      "default": "104 cm"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_2_label",
+      "label": "Dimension 2 Label",
+      "default": "Ancho (B)"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_2_value",
+      "label": "Dimension 2 Value",
+      "default": "31 cm"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_3_label",
+      "label": "Dimension 3 Label",
+      "default": "Profundo (C)"
+    },
+    {
+      "type": "text",
+      "id": "chars_dim_3_value",
+      "label": "Dimension 3 Value",
+      "default": "36 cm"
+    },
+    {
+      "type": "text",
+      "id": "chars_tab_2_title",
+      "label": "Tab 2 Title",
+      "default": "Peso"
+    },
+    {
+      "type": "text",
+      "id": "chars_weight_value",
+      "label": "Weight Value",
+      "default": "18 kg"
+    },
+    {
+      "type": "text",
+      "id": "chars_btn_text",
+      "label": "Spec Sheet Button Text",
+      "default": "Ficha técnica"
+    },
+    {
+      "type": "url",
+      "id": "chars_btn_link",
+      "label": "Spec Sheet Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Bottom CTA"
+    },
+    {
+      "type": "html",
+      "id": "bottom_cta_title",
+      "label": "Bottom CTA Title",
+      "default": "Paga SÓLO por el<br>agua que consumes."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_image",
+      "label": "Bottom CTA Image"
+    },
+    {
+      "type": "text",
+      "id": "bottom_cta_text",
+      "label": "Button Text",
+      "default": "Más info"
+    },
+    {
+      "type": "url",
+      "id": "bottom_cta_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CB Core Landing"
+    }
+  ]
+}
+{% endschema %}
