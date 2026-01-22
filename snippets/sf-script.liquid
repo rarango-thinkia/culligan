@@ -1,0 +1,284 @@
+<script>
+  (function() {
+      // Internal State
+      let currentStep = 'check-client'; 
+      let currentFlow = 'bottled'; // 'bottled' | 'matrix'
+      let isCalculatorPath = false;
+      let isExistingClient = null;
+      let isClientValidated = false;
+      
+      console.log('SF Script Loaded. Initial Step:', currentStep);
+
+      // --- Logic ---
+      function getNextStep() {
+        // Client Check Flow
+        // Si es cliente, valida inline. Al dar Continuar, va al Paso 1 (Catálogo)
+        if (currentStep === 'check-client') return '1';
+        
+        // Legacy/Safety
+        if (currentStep === 'validate-client') return '1';
+        if (currentStep === 'welcome-client') return '1';
+
+        // Main Flow
+        if (currentStep === '1') {
+            return (currentFlow === 'bottled') ? '2-bottled' : '2-matrix';
+        }
+        // Bottled Flow
+        if (currentStep === '2-bottled') return '3-bottled';
+        if (currentStep === '3-bottled') return '4'; // Plan selection
+        if (currentStep === '4') return isCalculatorPath ? '5' : '7'; // Branch to Calc or Contract
+        if (currentStep === '5') return '6';
+        if (currentStep === '6') return '7';
+        
+        // Matrix Flow
+        if (currentStep === '2-matrix') return '3-matrix';
+        if (currentStep === '3-matrix') return '7'; // Skip Plans/Calc for Matrix
+
+        // Common End
+        if (currentStep === '7') return '8';
+        if (currentStep === '8') return '9';
+        
+        return null;
+      }
+      
+      function getPrevStep() {
+        if (currentStep === '9') return '8';
+        if (currentStep === '8') return '7';
+        if (currentStep === '7') {
+            if (currentFlow === 'matrix') return '3-matrix';
+            // Bottled logic
+            if (isCalculatorPath) return '6';
+            return '4';
+        }
+        
+        if (currentStep === '6') return '5';
+        if (currentStep === '5') return '4';
+        if (currentStep === '4') return '3-bottled';
+        
+        if (currentStep === '3-bottled') return '2-bottled';
+        if (currentStep === '2-bottled') return '1';
+        
+        if (currentStep === '3-matrix') return '2-matrix';
+        if (currentStep === '2-matrix') return '1';
+
+        // Back from Step 1
+        if (currentStep === '1') {
+            return isExistingClient ? 'check-client' : 'check-client';
+        }
+        
+        if (currentStep === 'validate-client') return 'check-client';
+        
+        return null;
+      }
+
+      // --- Global Functions (Exposed) ---
+      
+      window.updateUI = function() {
+        // Debug: List all available steps
+        const allSteps = document.querySelectorAll('.sf-step');
+        
+        // 1. Hide all
+        allSteps.forEach(el => el.classList.add('hidden'));
+        
+        // 2. Show current
+        const currentEl = document.querySelector(`.sf-step[data-step="${currentStep}"]`);
+        if(currentEl) {
+             currentEl.classList.remove('hidden');
+        } else {
+             console.error('Step not found:', currentStep);
+        }
+
+        // 3. Update Progress (Rough approximation)
+        let percent = 5;
+        // if(currentStep === 'validate-client') percent = 10; // Ya no existe como paso visual
+        // if(currentStep === 'welcome-client') percent = 15; // Eliminado
+        if(currentStep === '1') percent = 20;
+        if(currentStep.includes('2')) percent = 35;
+        if(currentStep.includes('3')) percent = 50;
+        if(currentStep === '4') percent = 60;
+        if(currentStep === '7') percent = 80;
+        if(currentStep === '9') percent = 95;
+        
+        const progBar = document.getElementById('sf-progress');
+        if(progBar) progBar.style.width = `${percent}%`;
+
+        // 4. Footer & Buttons
+        const footerNav = document.getElementById('sf-footer-nav');
+        const footerCenter = document.getElementById('sf-footer-center');
+        const btnBack = document.getElementById('btn-back');
+        const btnNext = document.getElementById('btn-next');
+        
+        // Default State
+        if(footerNav) footerNav.style.display = 'flex'; // Default show for later steps
+        
+        // Hide global footer for specific steps where we want buttons "inside the card" (local)
+        // Eliminamos validate-client y welcome-client de aqui
+        if (['check-client', 'validate-client', '1'].includes(currentStep)) {
+             if(footerNav) footerNav.style.display = 'none';
+        }
+
+        // Custom Logic (Only for global footer steps, e.g. 2, 3...)
+        if (!['check-client', 'validate-client', '1'].includes(currentStep)) {
+             if(btnBack) btnBack.style.display = 'block';
+             if(btnNext) btnNext.style.display = 'block';
+             
+             // Restore default navigation
+             if(btnNext) btnNext.onclick = function() { window.navigate(1); }
+            
+             if (currentStep === '6' || currentStep === '3-matrix') {
+                  if(btnNext) btnNext.innerHTML = 'Continuar >';
+             } else if (currentStep === '7') {
+                  if(btnNext) btnNext.innerHTML = 'Continuar a firmar >';
+             } else if (currentStep === '9') {
+                  if(btnNext) btnNext.innerHTML = 'Pagar ahora >';
+             } else {
+                  if(btnNext) btnNext.innerHTML = 'Continuar >';
+             }
+        }
+
+        const header = document.querySelector('.sf-header');
+        if(header) header.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      window.navigate = function(direction) {
+        if (direction === 1) {
+            
+            // Validation for Check Client
+            if (currentStep === 'check-client') {
+                if (isExistingClient === null) return; // Must select option
+                if (isExistingClient === true && !isClientValidated) {
+                     return; // Block simple navigation if valid DNI is required
+                } 
+            }
+
+            // Validation for Step 1
+            if (currentStep === '1') {
+                const selected = document.querySelector('.sf-step[data-step="1"] .sf-select-card.selected');
+                if (!selected) {
+                    alert("Por favor selecciona un tipo de producto.");
+                    return;
+                }
+            }
+
+            if (currentStep === '9') {
+                alert('Procesando pago...');
+                return;
+            }
+            const next = getNextStep();
+            if (next) currentStep = next;
+        } else {
+            const prev = getPrevStep();
+            if (prev) currentStep = prev;
+        }
+        window.updateUI();
+      }
+
+      window.selectFlow = function(type, card) {
+        currentFlow = type;
+        window.selectCard(card);
+        
+        // Habilitar botón si estamos en paso 1
+        if (currentStep === '1') {
+            const btn = document.getElementById('btn-step1-next');
+            if(btn) btn.removeAttribute('disabled');
+        }
+      }
+
+      window.startCalculator = function() {
+        isCalculatorPath = true;
+        currentStep = '5';
+        window.updateUI();
+      }
+
+      window.selectCard = function(card) {
+        const parent = card.parentElement;
+        parent.querySelectorAll('.sf-select-card, .sf-plan-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        
+        if (currentStep === '4') {
+            isCalculatorPath = false; 
+        }
+      }
+      
+      // New Client Check Functions
+      window.handleClientCheck = function(isClient, card) {
+          isExistingClient = isClient;
+          window.selectCard(card);
+          
+          const dniSection = document.getElementById('dni-validation-section');
+          const nextBtn = document.getElementById('btn-check-client-next');
+          
+          // Reset validation state
+          isClientValidated = false;
+          const welcomeMsg = document.getElementById('client-welcome-message');
+          if(welcomeMsg) welcomeMsg.style.display = 'none';
+
+          if(isClient) {
+              // Show DNI input
+              if(dniSection) dniSection.style.display = 'block';
+              // Disable "Continuar" button (user must validate via "Enviar")
+              if(nextBtn) {
+                  nextBtn.setAttribute('disabled', 'true');
+                  nextBtn.style.opacity = '0.5';
+              }
+          } else {
+              // Hide DNI input
+              if(dniSection) dniSection.style.display = 'none';
+              // Enable "Continuar" button
+              if(nextBtn) {
+                  nextBtn.removeAttribute('disabled');
+                  nextBtn.style.opacity = '1';
+              }
+          }
+      }
+      
+      window.validateClientDNI = function() {
+          const input = document.getElementById('client-dni-input');
+          const val = input ? input.value.trim() : '';
+          
+          if(val.length > 3) {
+              // Simulate API lookup
+              isClientValidated = true; // Mark validated
+              const lastChar = val.slice(-1);
+              const isEven = !isNaN(lastChar) && parseInt(lastChar) % 2 === 0;
+              const productName = isEven ? "dispensador de agua embotellada" : "dispensador conectado a la red";
+              
+              const productSpan = document.getElementById('client-product-name');
+              if(productSpan) {
+                  productSpan.innerText = productName;
+              }
+              
+              // 1. Hide Input & Button? OR keep them visible but disabled?
+              // Design shows the input with value "05467928H" and GREEN button stays "Enviar" or maybe just shows result below.
+              // Let's keep them visible.
+              
+              // 2. Show Welcome Message
+              const welcomeMsg = document.getElementById('client-welcome-message');
+              if(welcomeMsg) {
+                  welcomeMsg.style.display = 'block';
+                  // Scroll to bottom to ensure user sees it
+                  welcomeMsg.scrollIntoView({ behavior: 'smooth' });
+              }
+
+              // 3. Enable "Continuar" button at the footer so user can proceed to next step manually
+              const nextBtn = document.getElementById('btn-check-client-next');
+              if(nextBtn) {
+                  nextBtn.removeAttribute('disabled');
+                  nextBtn.style.opacity = '1';
+                  
+                  // Update logic constraint: Now user can proceed.
+                  // We might need to ensure navigate(1) goes to Step 1, NOT back to welcome.
+              }
+              
+          } else {
+              alert("Por favor introduce un DNI válido (mínimo 4 caracteres)");
+          }
+      },
+
+      // Init
+      document.addEventListener('DOMContentLoaded', () => {
+          window.updateUI();
+      });
+
+  })();
+</script>

@@ -1,0 +1,74 @@
+<div class="sf-step hidden" data-step="5" style="display:flex; flex-direction:column; min-height:550px;">
+  <!-- Breadcrumb -->
+  <div class="text-center mb-2" style="font-size:14px; color:#1c5bf0; font-weight:700;">🏠 Home <span style="color:#666; font-weight:400;">> CB - Core</span></div>
+
+  <div style="flex:1; text-align:center;">
+    <h1 class="sf-step-title" style="margin-bottom:10px;">¿Cuántas botellas quieres comprar?</h1>
+    <p class="sf-step-subtitle">Calcularemos el tiempo de abastecimiento para 2,5 personas.</p>
+    
+    <!-- Green Button (Static/Indicator) -->
+    <div style="margin-bottom:30px;">
+        <button class="sf-calc-btn" style="background-color:#6bfebb; color:#004d40; box-shadow:0 4px 6px rgba(107, 254, 187, 0.3); pointer-events:none;">Calcular mi consumo ></button>
+    </div>
+
+    <!-- Duration Info -->
+    <div style="background:#f2f4f7; border-radius:8px; padding:12px 20px; display:inline-block; font-size:14px; color:#475467; font-weight:500; margin-bottom:30px;">
+        Esta selección te durará <strong>3 meses</strong>
+    </div>
+
+    <!-- Counter & Slider -->
+    <div style="max-width:400px; margin:0 auto 40px auto;">
+        <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:20px;">
+           <button class="sf-circle-btn" onclick="updateBottles(-1)" style="width:40px; height:40px; border-radius:50%; background:#1c5bf0; color:white; border:none; font-size:20px; cursor:pointer;">-</button>
+           <div id="bottle-display" style="border:1px solid #1c5bf0; border-radius:8px; padding:10px 40px; font-weight:700; color:#101828; min-width:160px;">6 botellas</div>
+           <button class="sf-circle-btn" onclick="updateBottles(1)" style="width:40px; height:40px; border-radius:50%; background:#1c5bf0; color:white; border:none; font-size:20px; cursor:pointer;">+</button>
+        </div>
+        
+        <input type="range" id="bottle-slider" min="4" max="24" value="6" step="1" oninput="updateBottlesFromSlider(this.value)" style="width:100%; accent-color:#001529; cursor:pointer;">
+    </div>
+
+    <!-- Plan Summary Card -->
+    <div style="background:#f8faff; border-radius:12px; padding:30px; max-width:320px; margin:0 auto;">
+       <div style="font-weight:700; font-size:11px; margin-bottom:15px; color:#475467; letter-spacing:1px; text-transform:uppercase;">Plan flexible</div>
+       
+       <div style="margin-bottom:20px; position:relative; display:inline-block;">
+           <div style="font-size:40px;">💧</div>
+           <span id="bottle-badge" style="position:absolute; top:-5px; right:-10px; background:#1c5bf0; color:white; font-size:10px; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">x6</span>
+       </div>
+
+       <div style="font-size:15px; color:#101828; margin-bottom:5px;">Pago único ahora: <span id="price-display" style="font-weight:700; font-size:18px;">60€</span></div>
+       <div id="initial-order-display" style="font-size:11px; color:#1c5bf0; margin-bottom:10px;">Pedido inicial de 6 botellas (11L)</div>
+       <p style="font-size:10px; color:#475467; line-height:1.4;">Podrás pedir más bajo demanda cuando lo necesites</p>
+    </div>
+  </div>
+  
+  <script>
+    function updateBottles(change) {
+       const slider = document.getElementById('bottle-slider');
+       let newVal = parseInt(slider.value) + change;
+       if (newVal >= 4 && newVal <= 24) {
+          slider.value = newVal;
+          updateUIValues(newVal);
+       }
+    }
+    
+    function updateBottlesFromSlider(val) {
+       updateUIValues(parseInt(val));
+    }
+    
+    function updateUIValues(bottles) {
+       const pricePerBottle = 10;
+       const months = Math.ceil(bottles / 2); // Logic: ~2 bottles/month per person? Adjusted to match '6 bottles = 3 months' example
+       
+       document.getElementById('bottle-display').innerText = bottles + ' botellas';
+       document.getElementById('bottle-badge').innerText = 'x' + bottles;
+       document.getElementById('price-display').innerText = (bottles * pricePerBottle) + '€';
+       document.getElementById('initial-order-display').innerText = `Pedido inicial de ${bottles} botellas (11L)`;
+       
+       // Update duration text
+       // Locating the element by its text content structure since it has no ID in the HTML above (added dynamic ID would be better but simple lookup works for now)
+       const durationBox = document.querySelector('.sf-step[data-step="5"] div[style*="background:#f2f4f7"]');
+       if(durationBox) durationBox.innerHTML = `Esta selección te durará <strong>${months} meses</strong>`;
+    }
+  </script>
+</div>

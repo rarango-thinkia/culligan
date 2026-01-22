@@ -1,0 +1,44 @@
+<div class="sf-step hidden" data-step="2-bottled" style="display:flex; flex-direction:column; min-height:550px;">
+  <div style="flex:1">
+    <div class="text-center mb-2" style="font-size:14px; color:#666;">🏠 Home > CB - Core</div>
+    <h1 class="sf-step-title">¿Qué tipo de máquina buscas?</h1>
+    <p class="sf-step-subtitle">Selecciona qué máquina se adapta mejor a tu casa.</p>
+
+    <div class="sf-card-grid" style="align-items: flex-end;">
+      <!-- Card 1: Standing -->
+      <div class="sf-select-card selected" onclick="selectCard(this)" style="padding-top:20px; padding-bottom:20px;">
+        <div class="sf-card-icon" style="height:120px; margin-bottom:15px;">
+           <img src="{{ 'cb-core.png' | asset_url }}" alt="CB Core" style="height:100%; object-fit:contain;">
+        </div>
+        <div class="sf-card-title" style="color:var(--sf-blue-primary);">CB Core<br><span style="font-weight:400; font-size:14px; color:#666">Dispensador de pie</span></div>
+      </div>
+      
+      <!-- Card 2: Countertop -->
+      <div class="sf-select-card" onclick="selectCard(this)" style="padding-top:20px; padding-bottom:20px;">
+        <div class="sf-card-icon" style="height:120px; margin-bottom:15px; display:flex; align-items:flex-end;">
+            <img src="{{ 'culligan-touch.png' | asset_url }}" alt="Culligan Touch" style="height:80px; object-fit:contain;">
+        </div>
+         <div class="sf-card-title">Culligan Touch<br><span style="font-weight:400; font-size:14px; color:#666">Dispensador sobre mostrador</span></div>
+      </div>
+    </div>
+
+    <!-- Extra Info -->
+    <div class="text-center" style="margin-top:30px;">
+       <p style="color:var(--sf-blue-primary); font-size:14px; margin-bottom:20px;">Ambos productos disponen de 3 temperaturas: Ambiente, frío y caliente.</p>
+       
+       <div style="display:flex; justify-content:center; gap:60px;">
+          <!-- Icon 1 -->
+          <div style="text-align:center;">
+             <div style="font-size:24px; margin-bottom:5px;">☀️ ❄️</div>
+             <div style="font-size:11px; font-weight:700;">Frío y Caliente</div>
+          </div>
+          <!-- Icon 2 -->
+          <div style="text-align:center;">
+             <div style="font-size:24px; margin-bottom:5px;">❄️ 🌡️</div>
+             <div style="font-size:11px; font-weight:700;">Frío y Natural</div>
+          </div>
+       </div>
+    </div>
+  </div>
+
+</div>
