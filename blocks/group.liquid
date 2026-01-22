@@ -1,10 +1,13 @@
-
-
 {%- capture children %}
   {% content_for 'blocks' %}
 {% endcapture %}
 
-{% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes %}
+{% render 'group',
+  children: children,
+  settings: block.settings,
+  shopify_attributes: block.shopify_attributes,
+  class: block.settings.custom_class
+%}
 
 {% schema %}
 {
@@ -497,6 +500,11 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom Class"
     }
   ],
   "presets": [

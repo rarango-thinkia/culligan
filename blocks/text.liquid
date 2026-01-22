@@ -1,6 +1,4 @@
-
-
-{% render 'text', block: block %}
+{% render 'text', block: block, class: block.settings.custom_class %}
 
 {% schema %}
 {
@@ -381,6 +379,11 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom Class"
     }
   ],
   "presets": [

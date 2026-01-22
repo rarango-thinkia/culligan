@@ -1,0 +1,263 @@
+{% comment %}
+  Renders a solution finder form as a block.
+  Accepts:
+  - block: {Object} Block object with settings.
+{% endcomment %}
+
+{%- style -%}
+  .solution-finder-block-{{ block.id }} {
+    width: 100%;
+    margin: 0;
+    padding-block-start: {{ block.settings.padding_top }}px;
+    padding-block-end: {{ block.settings.padding_bottom }}px;
+    text-align: left;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: {{ block.settings.max_width }}px;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__label {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    padding-right: 2.5rem;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1.1rem;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__select:focus {
+    border-color: #2a68fe;
+    outline: none;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__chevron {
+    position: absolute;
+    right: 0.8rem;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    color: #666;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.6rem;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__btn {
+    border-radius: 100px !important;
+    padding: 1.1rem 2.2rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__btn-primary {
+    background-color: #2a68fe !important;
+    color: #ffffff !important;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__btn-secondary {
+    background-color: #000a22 !important;
+    color: #ffffff !important;
+    gap: 0.8rem !important;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__btn-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .solution-finder-block-{{ block.id }} .solution-finder__title {
+    margin: 0 0 0.8rem 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #000;
+  }
+
+
+  .hero-text-group {
+    margin-left: 13%;
+  }
+
+
+  @media screen and (max-width: 749px) {
+
+    .hero-text-group {
+      margin-left: 0;
+    }
+
+
+    .hero-section > div.group-block-content {
+      padding-inline: 0 !important;
+      padding-block-start: 0 !important;
+     }
+
+
+    .group-image-hero > .group-block-content {
+      padding-inline: 0 !important;
+      padding-block-start: 0 !important;
+    }
+
+    /* Target the text and form group specifically to add padding */
+    .group-block:has(.solution-finder-block-{{ block.id }}) .group-block-content {
+      padding-inline: 0.5rem;
+      padding-block-start: 1.5rem;
+      padding-block-end: 0.5rem;
+    }
+
+    .solution-finder-block-{{ block.id }} {
+      padding-block-start: 0.5rem;
+      padding-inline: 0; /* Already handled by parent padding */
+    }
+
+    .solution-finder-block-{{ block.id }} .solution-finder__title {
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .solution-finder-block-{{ block.id }} .solution-finder__row {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .solution-finder-block-{{ block.id }} .solution-finder__label {
+      font-size: 0.95rem;
+    }
+
+    .solution-finder-block-{{ block.id }} .solution-finder__select {
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+    }
+
+    .solution-finder-block-{{ block.id }} .solution-finder__buttons {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .solution-finder-block-{{ block.id }} .solution-finder__btn {
+      width: 100% !important;
+      padding: 1rem 1.5rem !important;
+      font-size: 1rem !important;
+      height: 52px !important; /* Consistent height */
+    }
+  }
+{%- endstyle -%}
+
+<div class="solution-finder-block-{{ block.id }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.title != blank -%}
+    <h4 class="solution-finder__title">{{ block.settings.title }}</h4>
+  {%- endif -%}
+
+  <form class="solution-finder__form">
+    <div class="solution-finder__row">
+      <div class="solution-finder__field">
+        <label for="for-{{ block.id }}" class="solution-finder__label">{{ block.settings.label_1 }}</label>
+        <div class="solution-finder__select-wrapper">
+          <select id="for-{{ block.id }}" class="solution-finder__select">
+            {%- assign opt1 = block.settings.options_1 | split: ',' -%}
+            {%- for o in opt1 -%}
+              <option value="{{ o | handle }}">{{ o | strip }}</option>
+            {%- endfor -%}
+          </select>
+          <span class="solution-finder__chevron">
+            {% render 'icon', icon: 'caret' %}
+          </span>
+        </div>
+      </div>
+      <div class="solution-finder__field">
+        <label for="find-{{ block.id }}" class="solution-finder__label">{{ block.settings.label_2 }}</label>
+        <div class="solution-finder__select-wrapper">
+          <select id="find-{{ block.id }}" class="solution-finder__select">
+            {%- assign opt2 = block.settings.options_2 | split: ',' -%}
+            {%- for o in opt2 -%}
+              <option value="{{ o | handle }}">{{ o | strip }}</option>
+            {%- endfor -%}
+          </select>
+          <span class="solution-finder__chevron">
+            {% render 'icon', icon: 'caret' %}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="solution-finder__buttons">
+      <button type="submit" class="solution-finder__btn solution-finder__btn-primary">
+        {{ block.settings.btn1_label }}
+      </button>
+      {%- if block.settings.btn2_label != blank -%}
+        <a
+          href="{{ block.settings.btn2_link | default: '/collections/all' }}"
+          class="solution-finder__btn solution-finder__btn-secondary"
+        >
+          <span class="solution-finder__btn-icon">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+          </span>
+          {{ block.settings.btn2_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </form>
+</div>

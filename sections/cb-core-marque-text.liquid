@@ -1,0 +1,64 @@
+{% comment %} Marquee Section {% endcomment %}
+<div class="cb-marquee">
+  <div class="cb-marquee__content">
+    <span>
+      {{- section.settings.marquee_text }}
+      <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+      <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+      <span class="cb-drop">💧</span>
+    </span>
+    <span>
+      {{- section.settings.marquee_text }}
+      <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+      <span class="cb-drop">💧</span> {{ section.settings.marquee_text }}
+      <span class="cb-drop">💧</span>
+    </span>
+  </div>
+</div>
+
+{% style %}
+  .cb-marquee {
+    background: #ffffff;
+    color: #2a68fe;
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+  .cb-marquee__content {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .cb-drop {
+    margin: 0 20px;
+  }
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Marque Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee Text",
+      "default": "AGUA PURA AL ALCANCE DE TU MANO"
+    }
+  ]
+}
+{% endschema %}

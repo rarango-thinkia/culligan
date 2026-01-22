@@ -139,6 +139,7 @@
         "group_H6VpwJ",
         "email_signup_crihX7"
       ],
+      "disabled": true,
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
@@ -283,7 +284,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-             "payment_icons_main": {
+            "payment_icons_main": {
               "type": "payment-icons",
               "name": "t:names.payment_icons",
               "settings": {
@@ -295,7 +296,7 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-             }
+            }
           },
           "block_order": [
             "payment_icons_main"

@@ -1,0 +1,108 @@
+{% render 'solution-finder', block: block %}
+
+{% schema %}
+{
+  "name": "Solution Finder",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "¿Cómo podemos ayudarte?"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Max width",
+      "default": 650
+    },
+    {
+      "type": "header",
+      "content": "Dropdown 1"
+    },
+    {
+      "type": "text",
+      "id": "label_1",
+      "label": "Label 1",
+      "default": "Para"
+    },
+    {
+      "type": "text",
+      "id": "options_1",
+      "label": "Options (Comma separated)",
+      "default": "Para mi Hogar, Para mi Negocio"
+    },
+    {
+      "type": "header",
+      "content": "Dropdown 2"
+    },
+    {
+      "type": "text",
+      "id": "label_2",
+      "label": "Label 2",
+      "default": "busco..."
+    },
+    {
+      "type": "text",
+      "id": "options_2",
+      "label": "Options (Comma separated)",
+      "default": "Servicio de reparto de agua, Filtros de agua"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "btn1_label",
+      "label": "Primary button label",
+      "default": "Encuentra una solución"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Secondary button label",
+      "default": "Comprar productos"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Solution Finder"
+    }
+  ]
+}
+{% endschema %}
