@@ -1,0 +1,20 @@
+<div class="sf-step hidden" data-step="validate-client">
+  <div style="flex:1">
+    <h1 class="sf-step-title" style="margin-top:30px;">¿Eres cliente de Culligan?</h1>
+    <p class="sf-step-subtitle">Necesitamos validar tus productos</p>
+    
+    <div style="max-width:360px; margin:40px auto; text-align:left; background:#fff; padding:20px; border-radius:12px;">
+        <label style="display:block; font-size:14px; font-weight:700; margin-bottom:8px; color:#344054;">DNI*</label>
+        <input type="text" id="client-dni-input" placeholder="Introduce tu DNI" class="sf-input" style="margin-bottom:24px;">
+        
+        <button class="sf-calc-btn" onclick="validateClientDNI()" style="width:100%; box-shadow:0 4px 6px rgba(107, 254, 187, 0.3);">Enviar</button>
+    </div>
+  </div>
+    
+  <!-- Local Actions Pinned Bottom -->
+  <div style="margin-top:auto; display:flex; justify-content:space-between; width:100%; border-top:1px solid #eef0f2; padding-top:24px;">
+       <button class="btn-plain" onclick="navigate(-1)">&lt; Atrás</button>
+       <!-- Ghost button to balance layout if needed, or just hidden -->
+       <button class="sf-calc-btn" style="visibility:hidden">Continuar &gt;</button>
+  </div>
+</div>

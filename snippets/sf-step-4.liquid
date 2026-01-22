@@ -1,0 +1,50 @@
+<div class="sf-step hidden" data-step="4" style="display:flex; flex-direction:column; min-height:550px;">
+  <div style="flex:1">
+     <!-- Breadcrumb -->
+     <div class="text-center mb-2" style="font-size:14px; color:#1c5bf0; font-weight:700;">🏠 Home <span style="color:#666; font-weight:400;">> CB - Core</span></div>
+    
+     <h1 class="sf-step-title" style="margin-bottom:10px;">Selecciona el plan que más se adapte a tu consumo en el hogar.</h1>
+     
+     <div class="text-center" style="margin-bottom:30px;">
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:5px;">¡Elige tu estilo de hidratación en 2 pasos!</h3>
+        <p style="color:#666; font-size:14px; margin-bottom:20px;">Calcularemos automáticamente tu consumo total recomendado.</p>
+        
+        <button class="sf-calc-btn" onclick="startCalculator()" style="background-color:#6bfebb; color:#004d40; box-shadow:0 4px 6px rgba(107, 254, 187, 0.3);">Calcular mi consumo ></button>
+     </div>
+  
+     <div class="sf-plan-grid" style="gap:24px;">
+        <!-- Plan 1 -->
+        <div class="sf-plan-card" onclick="selectCard(this)" style="background:#f8faff; border:none; border-radius:12px; padding:30px 20px;">
+           <div style="font-weight:700; font-size:11px; margin-bottom:15px; color:#475467; letter-spacing:1px;">PLAN FLEXIBLE</div>
+           
+           <div style="margin-bottom:20px; position:relative; display:inline-block;">
+               <div style="font-size:40px;">💧</div>
+               <span style="position:absolute; top:-5px; right:-10px; background:#1c5bf0; color:white; font-size:10px; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">x4</span>
+           </div>
+
+           <div style="font-size:15px; color:#101828; margin-bottom:10px;">Pago único ahora: <span style="font-weight:700; font-size:18px;">10€</span>/botella</div>
+           <div style="font-size:14px; color:#1c5bf0; margin-bottom:20px;">Pedido mínimo de 4 botellas (11L)</div>
+           <p style="font-size:12px; color:#475467; line-height:1.4;">Podrás pedir más bajo demanda cuando lo necesites</p>
+        </div>
+        
+        <!-- Plan 2 -->
+        <div class="sf-plan-card selected" onclick="selectCard(this)" style="background:#f8faff; border:none; border-radius:12px; padding:30px 20px;">
+           <div style="font-weight:700; font-size:11px; margin-bottom:15px; color:#475467; letter-spacing:1px;">PLAN MENSUAL</div>
+
+           <div style="margin-bottom:20px; position:relative; display:inline-block;">
+               <div style="font-size:40px; filter: grayscale(100%) brightness(120%) sepia(100%) hue-rotate(180deg) saturate(300%);">💧</div> <!-- Blue hue effect -->
+               <span style="position:absolute; top:-5px; right:-10px; background:#1c5bf0; color:white; font-size:10px; font-weight:700; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;">x24</span>
+           </div>
+
+           <div style="font-size:15px; color:#101828; margin-bottom:10px;">Suscripción mensual: <span style="font-weight:700; font-size:18px;">20€</span>/mes</div>
+           <div style="font-size:14px; color:#1c5bf0; margin-bottom:20px;">Incluye 24 botellas al año y 6 envíos</div>
+           <p style="font-size:12px; color:#475467; line-height:1.4;">Podrás pedir más bajo demanda cuando lo necesites</p>
+        </div>
+     </div>
+
+     <!-- Green Info Banner -->
+     <div style="margin-top:40px; background:#eafff5; border-radius:8px; padding:15px; text-align:center; color:#004d40; font-size:12px; line-height:1.5;">
+        <strong>Dato de interés:</strong> Un adulto promedio bebe alrededor de 2 litros al día, lo que equivale a 5-6 botellas por persona al mes.
+     </div>
+  </div>
+</div>

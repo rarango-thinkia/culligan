@@ -47,9 +47,11 @@
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+    {% unless template == 'page.funnel' %}
     <div id="header-group">
       {% sections 'header-group' %}
     </div>
+    {% endunless %}
 
     <script>
       // Inline header height calculation to prevent layout shift
@@ -113,7 +115,9 @@
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    {% unless template == 'page.funnel' %}
+      {% sections 'footer-group' %}
+    {% endunless %}
 
     {% render 'search-modal' %}
 
